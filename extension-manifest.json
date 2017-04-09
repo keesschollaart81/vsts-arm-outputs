@@ -1,0 +1,89 @@
+{
+    "manifestVersion": 1,
+    "id": "arm-outputs",
+    "name": "ARM Outputs",
+    "version": "1.0.0",
+    "publisher": "keesschollaart",
+    "public": false,
+    "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "Use ARM Deployment outputs",
+    "categories": [
+        "Build and release"
+    ],
+    "tags": [
+        "azure",
+        "arm",
+        "template",
+        "build",
+        "release",
+        "output",
+        "variable",
+        "parameter",
+        "resource",
+        "group",
+        "deployment",
+        "resourcegroup"
+    ],
+    "screenshots": [
+        {
+            "path": "images/screenshots-vsts-arm-outputs-1.png"
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "readme.md"
+        },
+        "license": {
+            "path": "LICENSE"
+        }
+    },
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/keesschollaart81/vsts-arm-outputs"
+        },
+        "support": {
+            "uri": "https://github.com/keesschollaart81/vsts-arm-outputs"
+        }
+    },
+    "branding": {
+        "color": "rgb(82,108,161)",
+        "theme": "light"
+    },
+    "icons": {
+        "default": "images/logo.png"
+    },
+    "files": [
+        {
+            "path": "src"
+        },
+        {
+            "path": "images/screenshots-vsts-arm-outputs-1.png",
+            "addressable": true
+        },
+        {
+            "path": "images/logo.png",
+            "addressable": true
+        }
+    ],
+    "contributions": [
+        {
+            "id": "arm-outputs",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "arm-outputs"
+            }
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/keesschollaart81/vsts-arm-outputs"
+    }
+}

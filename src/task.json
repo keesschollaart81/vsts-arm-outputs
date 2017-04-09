@@ -1,0 +1,66 @@
+{
+    "id": "584bcff2-3353-4f11-872b-6ba01267a972",
+    "name": "Use ARM Outputs",
+    "friendlyName": "Use ARM Outputs",
+    "description": "This task reads the output values of an ARM deployment and sets them as VSTS variable",
+    "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
+    "category": "Utility",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "author": "Kees Schollaart",
+    "version": {
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 0
+    },
+    "demands": [
+        "azureps"
+    ],
+    "minimumAgentVersion": "1.95.0",
+    "inputs": [
+        {
+            "name": "ConnectedServiceNameSelector",
+            "type": "pickList",
+            "label": "Azure Connection Type",
+            "required": true,
+            "helpMarkDown": "",
+            "defaultValue": "ConnectedServiceNameARM",
+            "options": {
+                "ConnectedServiceNameARM": "Azure Resource Manager"
+            }
+        },
+        {
+            "name": "ConnectedServiceNameARM",
+            "type": "connectedService:AzureRM",
+            "label": "AzureRM Subscription",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Select the Azure Resource Manager subscription."
+        },
+        {
+            "name": "resourceGroupName",
+            "type": "pickList",
+            "label": "Resource Group",
+            "required": true,
+            "helpMarkDown": "Provide the name of the resource group.",
+            "properties": {
+                "EditableOptions": "True"
+            }
+        }
+    ],
+    "dataSourceBindings": [
+        {
+            "target": "resourceGroupName",
+            "endpointId": "$(ConnectedServiceNameARM)",
+            "dataSourceName": "AzureResourceGroups"
+        }
+    ],
+    "instanceNameFormat": "Use ARM Outputs",
+    "execution": {
+        "PowerShell3": {
+            "target": "$(currentDirectory)\\run.ps1"
+        }
+    }
+}
