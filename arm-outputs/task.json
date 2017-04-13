@@ -1,10 +1,10 @@
 {
     "id": "584bcff2-3353-4f11-872b-6ba01267a972",
-    "name": "Use ARM Outputs",
-    "friendlyName": "Use ARM Outputs",
+    "name": "ARM Outputs",
+    "friendlyName": "ARM Outputs",
     "description": "This task reads the output values of an ARM deployment and sets them as VSTS variable",
     "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
-    "category": "Utility",
+    "category": "Deploy",
     "visibility": [
         "Build",
         "Release"
@@ -12,7 +12,7 @@
     "author": "Kees Schollaart",
     "version": {
         "Major": 1,
-        "Minor": 0,
+        "Minor": 12,
         "Patch": 0
     },
     "demands": [
@@ -57,7 +57,7 @@
             "dataSourceName": "AzureResourceGroups"
         }
     ],
-    "instanceNameFormat": "Use ARM Outputs",
+    "instanceNameFormat": "ARM Outputs",
     "execution": {
         "PowerShell3": {
             "target": "$(currentDirectory)\\run.ps1"

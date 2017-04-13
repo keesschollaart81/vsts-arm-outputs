@@ -1,7 +1,7 @@
-param ( 
-   [string] [Parameter(Mandatory = $true)] 
-   $resourceGroupName="vsts-arm-outputs-test-rg"
-) 
+Import-Module $PSScriptRoot\ps_modules\VstsAzureHelpers_
+Initialize-Azure
+
+$resourceGroupName = Get-VstsInput -Name resourceGroupName -Require
 
 Write-Verbose "Entering script run.ps1"
  

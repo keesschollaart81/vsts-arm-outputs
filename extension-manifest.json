@@ -2,16 +2,16 @@
     "manifestVersion": 1,
     "id": "arm-outputs",
     "name": "ARM Outputs",
-    "version": "1.0.0",
+    "version": "1.0.15",
     "publisher": "keesschollaart",
-    "public": false,
+    "public": true,
     "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
-    "description": "Use ARM Deployment outputs",
+    "description": "This extension reads the output values of an ARM deployment and sets them as VSTS variable",
     "categories": [
         "Build and release"
     ],
@@ -51,22 +51,27 @@
         }
     },
     "branding": {
-        "color": "rgb(82,108,161)",
+        "color": "rgb(216, 224, 240)",
         "theme": "light"
     },
     "icons": {
-        "default": "images/logo.png"
+        "default": "images/icon.png",
+        "large":"images/icon-large.png"
     },
     "files": [
         {
-            "path": "src"
+            "path": "arm-outputs"
         },
         {
             "path": "images/screenshots-vsts-arm-outputs-1.png",
             "addressable": true
         },
         {
-            "path": "images/logo.png",
+            "path": "images/icon.png",
+            "addressable": true
+        },
+        {
+            "path": "images/icon-large.png",
             "addressable": true
         }
     ],
