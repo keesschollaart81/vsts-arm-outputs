@@ -1,11 +1,6 @@
-Import-Module $PSScriptRoot\ps_modules\VstsAzureHelpers_
-Initialize-Azure
-
-$resourceGroupName = Get-VstsInput -Name resourceGroupName -Require
-
-Write-Verbose "Entering script run.ps1"
+Write-Verbose "Entering script arm-outputs.ps1"
  
-Write-Host "ResourceGroupName= $resourceGroupName"
+Write-Debug "ResourceGroupName= $resourceGroupName"
 
 $lastResourceGroupDeployment = Get-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName | Sort Timestamp -Descending | Select -First 1        
 
@@ -20,8 +15,16 @@ if(!$lastResourceGroupDeployment.Outputs)
 }
 
 foreach ($key in $lastResourceGroupDeployment.Outputs.Keys){
+    $type = $lastResourceGroupDeployment.Outputs.Item($key).Type
 	$value = $lastResourceGroupDeployment.Outputs.Item($key).Value
-	Write-Host "##vso[task.setvariable variable=$key;]$value"
 
-    Write-Verbose "Updating VSTS variable '$key' to value '$value'"
+	if ($type -eq "SecureString")
+	{
+	    Write-Information "Variable '$key' is of type SecureString and is therefore ignored"
+	}
+    else
+    {
+        Write-Information "Updating VSTS variable '$key' to value '$value'"
+	    Write-Host "##vso[task.setvariable variable=$key;$isSecret]$value" 
+    }
 }
