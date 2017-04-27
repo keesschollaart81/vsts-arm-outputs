@@ -48,6 +48,20 @@
             "properties": {
                 "EditableOptions": "True"
             }
+        },
+        {
+            "name": "prefix",
+            "type": "string",
+            "label": "Prefix",
+            "required": false,
+            "helpMarkDown": "Provide a prefix for all VSTS variable to set (prefix is add to the key/name of the ARM output(s)" 
+        },
+        {
+            "name": "outputNames",
+            "type": "string",
+            "label": "Outputs to process",
+            "required": false,
+            "helpMarkDown": "Provide a comma seperated list of ARM outputs (key/name) to process. If left empty, all outputs are processed" 
         }
     ],
     "dataSourceBindings": [
