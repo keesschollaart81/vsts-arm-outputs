@@ -12,7 +12,7 @@
     "author": "Kees Schollaart",
     "version": {
         "Major": 1,
-        "Minor": 13,
+        "Minor": 14,
         "Patch": 0
     },
     "demands": [
@@ -74,7 +74,7 @@
     "instanceNameFormat": "ARM Outputs",
     "execution": {
         "PowerShell3": {
-            "target": "$(currentDirectory)\\run.ps1"
+            "target": "$(currentDirectory)\\run-vsts.ps1"
         }
     }
 }
