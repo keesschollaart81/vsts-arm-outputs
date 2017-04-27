@@ -14,13 +14,18 @@ if(!$lastResourceGroupDeployment.Outputs)
     throw "No output parameters could be found for the last deployment of Resource Group '$resourceGroupName'."
 }
 
-$outputNamesCount = $outputNames.length
+$outputNamesArray = $null
+
+if ($outputNames){
+    $outputNamesArray = $outputNames.split(',') | ForEach-Object { $_.Trim() }
+}
+$outputNamesCount = $outputNamesArray.length
 
 foreach ($key in $lastResourceGroupDeployment.Outputs.Keys){
     $type = $lastResourceGroupDeployment.Outputs.Item($key).Type
 	$value = $lastResourceGroupDeployment.Outputs.Item($key).Value
 
-    if($outputNamesCount -gt 0 -and $outputNames -notcontains $key)
+    if($outputNamesCount -gt 0 -and $outputNamesArray -notcontains $key)
     {
         Write-Debug "Variable '$key' is not one of the $outputNamesCount given key's to set, ignoring..."
         continue;
