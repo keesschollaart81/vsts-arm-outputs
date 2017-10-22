@@ -33,11 +33,11 @@ foreach ($key in $lastResourceGroupDeployment.Outputs.Keys){
     
 	if ($type -eq "SecureString")
 	{
-	    Write-Information "Variable '$key' is of type SecureString, ignoring..."
+	    Write-Verbose "Variable '$key' is of type SecureString, ignoring..."
 	}
     else
     {
-        Write-Information "Updating VSTS variable '$key' to value '$value'"
+        Write-Verbose "Updating VSTS variable '$key' to value '$value'"
 	    Write-Host "##vso[task.setvariable variable=$prefix$key;$isSecret]$value" 
     }
 }
