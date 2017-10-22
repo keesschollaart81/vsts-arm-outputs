@@ -11,7 +11,8 @@ if(!$lastResourceGroupDeployment)
 
 if(!$lastResourceGroupDeployment.Outputs)
 {
-    throw "No output parameters could be found for the last deployment of Resource Group '$resourceGroupName'."
+    Write-Warning "No output parameters could be found for the last deployment of Resource Group '$resourceGroupName'."
+    return;
 }
 
 $outputNamesArray = $null
