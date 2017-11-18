@@ -2,43 +2,54 @@ Write-Verbose "Entering script arm-outputs.ps1"
  
 Write-Debug "ResourceGroupName= $resourceGroupName"
 
-$lastResourceGroupDeployment = Get-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName | Sort Timestamp -Descending | Select -First 1        
+$lastResourceGroupDeployment = $lastResourceGroupDeployments | Select-Object -First 1      
 
-if(!$lastResourceGroupDeployment)
-{
+if ($whenLastDeploymentIsFailed -eq "latestSuccesful" ) {
+    $lastDeploymentStatus = $lastResourceGroupDeployment.ProvisioningState
+    if ($lastResourceGroupDeployment -and $lastDeploymentStatus -ne "Succeeded") {
+        Write-Debug "Last deployment of Resource Group '$resourceGroupName' did not succeed ('$lastDeploymentStatus'), ingoring this deployment and finding latest succesful deployment"
+    }
+    $lastResourceGroupDeployments = $lastResourceGroupDeployments | Where-Object {$_.ProvisioningState -eq "Succeeded"} 
+}
+
+$lastResourceGroupDeployment = $lastResourceGroupDeployments | Select-Object -First 1      
+
+if (!$lastResourceGroupDeployment) {
     throw "Deployment could not be found for Resource Group '$resourceGroupName'."
 }
 
-if(!$lastResourceGroupDeployment.Outputs)
-{
+$lastDeploymentStatus = $lastResourceGroupDeployment.ProvisioningState
+if ($whenLastDeploymentIsFailed -eq "fail" -and $lastDeploymentStatus -ne "Succeeded") {
+    Write-Error "Last deployment of Resource Group '$resourceGroupName' did not succeed (status '$lastDeploymentStatus')"
+    return;
+}
+
+if (!$lastResourceGroupDeployment.Outputs) {
     Write-Warning "No output parameters could be found for the last deployment of Resource Group '$resourceGroupName'."
     return;
 }
 
 $outputNamesArray = $null
 
-if ($outputNames){
+if ($outputNames) {
     $outputNamesArray = $outputNames.split(',') | ForEach-Object { $_.Trim() }
 }
 $outputNamesCount = $outputNamesArray.length
 
-foreach ($key in $lastResourceGroupDeployment.Outputs.Keys){
+foreach ($key in $lastResourceGroupDeployment.Outputs.Keys) {
     $type = $lastResourceGroupDeployment.Outputs.Item($key).Type
-	$value = $lastResourceGroupDeployment.Outputs.Item($key).Value
+    $value = $lastResourceGroupDeployment.Outputs.Item($key).Value
 
-    if($outputNamesCount -gt 0 -and $outputNamesArray -notcontains $key)
-    {
+    if ($outputNamesCount -gt 0 -and $outputNamesArray -notcontains $key) {
         Write-Debug "Variable '$key' is not one of the $outputNamesCount given key's to set, ignoring..."
         continue;
     }
     
-	if ($type -eq "SecureString")
-	{
-	    Write-Verbose "Variable '$key' is of type SecureString, ignoring..."
-	}
-    else
-    {
+    if ($type -eq "SecureString") {
+        Write-Verbose "Variable '$key' is of type SecureString, ignoring..."
+    }
+    else {
         Write-Verbose "Updating VSTS variable '$key' to value '$value'"
-	    Write-Host "##vso[task.setvariable variable=$prefix$key;$isSecret]$value" 
+        Write-Host "##vso[task.setvariable variable=$prefix$key;$isSecret]$value" 
     }
 }

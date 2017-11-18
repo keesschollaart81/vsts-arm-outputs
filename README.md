@@ -12,7 +12,7 @@ Usually this task is ran directly after the 'Azure Resource Group Deployment' ta
 
 ## Secrets
 
-If your output is of type ```SecureString``` we cannot read the output value and these outputs are therefore ignored.
+If your output is of type ```SecureString``` the output value cannot be read and these outputs are therefore ignored.
 
 You can off course output your secrets as string but then these values might be exposed in logfiles (and visible via the Azure Portal as well)
 
@@ -23,3 +23,11 @@ Using the 'prefix' parameter, it is possible to prefix the variables used within
 ## Output Names
 
 Using the 'Output Names' parameter, it is possible to process only a subset of the ARM Outputs. When this field is left empty (it is by default) all ARM Outputs are used.
+
+## When last deployment is failed
+
+Using the 'When last deployment is failed' parameter, you can choose the behaviour when the last deployment to a resource group has failed. There are two options, 1. fail the task (the default) or 2. take the last succesful deployment. 
+
+## Help & Contact
+
+Find me at http://case.schollaart.net/
