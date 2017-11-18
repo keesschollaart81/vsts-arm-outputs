@@ -2,12 +2,13 @@ Write-Verbose "Entering script arm-outputs.ps1"
  
 Write-Debug "ResourceGroupName= $resourceGroupName"
 
+$lastResourceGroupDeployments = Get-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName | Sort-Object Timestamp -Descending       
 $lastResourceGroupDeployment = $lastResourceGroupDeployments | Select-Object -First 1      
 
 if ($whenLastDeploymentIsFailed -eq "latestSuccesful" ) {
     $lastDeploymentStatus = $lastResourceGroupDeployment.ProvisioningState
     if ($lastResourceGroupDeployment -and $lastDeploymentStatus -ne "Succeeded") {
-        Write-Debug "Last deployment of Resource Group '$resourceGroupName' did not succeed ('$lastDeploymentStatus'), ingoring this deployment and finding latest succesful deployment"
+        Write-Verbose "Last deployment of Resource Group '$resourceGroupName' did not succeed ('$lastDeploymentStatus'), ingoring this deployment and finding latest succesful deployment"
     }
     $lastResourceGroupDeployments = $lastResourceGroupDeployments | Where-Object {$_.ProvisioningState -eq "Succeeded"} 
 }
@@ -20,8 +21,7 @@ if (!$lastResourceGroupDeployment) {
 
 $lastDeploymentStatus = $lastResourceGroupDeployment.ProvisioningState
 if ($whenLastDeploymentIsFailed -eq "fail" -and $lastDeploymentStatus -ne "Succeeded") {
-    Write-Error "Last deployment of Resource Group '$resourceGroupName' did not succeed (status '$lastDeploymentStatus')"
-    return;
+    throw "Last deployment of Resource Group '$resourceGroupName' did not succeed (status '$lastDeploymentStatus')"
 }
 
 if (!$lastResourceGroupDeployment.Outputs) {

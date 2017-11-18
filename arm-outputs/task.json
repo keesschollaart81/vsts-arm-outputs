@@ -11,9 +11,9 @@
     ],
     "author": "Kees Schollaart",
     "version": {
-        "Major": 1,
-        "Minor": 15,
-        "Patch": 0
+        "Major": 2,
+        "Minor": 0,
+        "Patch": 2
     },
     "demands": [
         "azureps"
