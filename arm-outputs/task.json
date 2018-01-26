@@ -80,7 +80,7 @@
             "type": "string",
             "label": "Filter previous deployments",
             "required": false,
-            "helpMarkDown": "Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in Azure are the name of the json file plus date and time , so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter."
+            "helpMarkDown": "Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in VSTS are the name of the json file plus date and time, so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter."
         }
     ],
     "dataSourceBindings": [
