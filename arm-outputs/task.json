@@ -1,6 +1,6 @@
 {
     "id": "584bcff2-3353-4f11-872b-6ba01267a972",
-    "name": "ARMOutputs",
+    "name": "ARM Outputs",
     "friendlyName": "ARM Outputs",
     "description": "This task reads the output values of an ARM deployment and sets them as VSTS variable",
     "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
@@ -64,23 +64,23 @@
             "helpMarkDown": "Provide a comma seperated list of ARM outputs (key/name) to process. If left empty, all outputs are processed"
         },
         {
-          "name": "whenLastDeploymentIsFailed",
-          "type": "pickList",
-          "label": "When last deployment is failed",
-          "defaultValue": "fail",
-          "required": true,
-          "helpMarkDown": "Choose the behaviour when the latest deployment is not succesful.",
-          "options": {
-            "fail": "Fail task",
-            "latestSuccesful": "Use last succesful deploment"
-          }
+            "name": "whenLastDeploymentIsFailed",
+            "type": "pickList",
+            "label": "When last deployment is failed",
+            "defaultValue": "fail",
+            "required": true,
+            "helpMarkDown": "Choose the behaviour when the latest deployment is not succesful.",
+            "options": {
+              "fail": "Fail task",
+              "latestSuccesful": "Use last succesful deploment"
+            }
         },
         {
-          "name": "deploymentNameFilter",
-          "type": "string",
-          "label": "Filter previous deployments",
-          "required": false,
-          "helpMarkDown": "Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in Azure are the name of the json file plus date and time , so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter."
+            "name": "deploymentNameFilter",
+            "type": "string",
+            "label": "Filter previous deployments",
+            "required": false,
+            "helpMarkDown": "Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in Azure are the name of the json file plus date and time , so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter."
         }
     ],
     "dataSourceBindings": [
