@@ -71,8 +71,8 @@
             "required": true,
             "helpMarkDown": "Choose the behaviour when the latest deployment is not succesful.",
             "options": {
-              "fail": "Fail task",
-              "latestSuccesful": "Use last succesful deploment"
+                "fail": "Fail task",
+                "latestSuccesful": "Use last succesful deploment"
             }
         },
         {
