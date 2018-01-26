@@ -7,5 +7,6 @@ $resourceGroupName = Get-VstsInput -Name resourceGroupName -Require
 $prefix = Get-VstsInput -Name prefix
 $outputNames = Get-VstsInput -Name outputNames
 $whenLastDeploymentIsFailed = Get-VstsInput -Name whenLastDeploymentIsFailed
+$deploymentNameFilter = Get-VstsInput -Name deploymentNameFilter
 
 .\arm-outputs.ps1
