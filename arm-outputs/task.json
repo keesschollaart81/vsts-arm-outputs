@@ -11,9 +11,9 @@
     ],
     "author": "Kees Schollaart",
     "version": {
-        "Major": 2,
+        "Major": 3,
         "Minor": 0,
-        "Patch": 3
+        "Patch": 0
     },
     "demands": [
         "azureps"
@@ -78,7 +78,7 @@
         {
             "name": "deploymentNameFilter",
             "type": "string",
-            "label": "Filter previous deployments",
+            "label": "Filter deployment name",
             "required": false,
             "helpMarkDown": "Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in VSTS are the name of the json file plus date and time, so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter."
         }
