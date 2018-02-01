@@ -28,6 +28,10 @@ Using the 'Output Names' parameter, it is possible to process only a subset of t
 
 Using the 'When last deployment is failed' parameter, you can choose the behaviour when the last deployment to a resource group has failed. There are two options, 1. fail the task (the default) or 2. take the last succesful deployment. 
 
+## Filter deployment name
+
+Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in VSTS are the name of the json file plus date and time, so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter
+
 ## Help & Contact
 
 Find me at http://case.schollaart.net/
