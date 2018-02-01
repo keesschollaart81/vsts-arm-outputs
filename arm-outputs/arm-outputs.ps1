@@ -7,8 +7,9 @@ $lastResourceGroupDeployment = $lastResourceGroupDeployments | Select-Object -Fi
 
 if ($whenLastDeploymentIsFailed -eq "latestSuccesful" ) {
     $lastDeploymentStatus = $lastResourceGroupDeployment.ProvisioningState
+    $deploymentName = $lastResourceGroupDeployment.DeploymentName
     if ($lastResourceGroupDeployment -and $lastDeploymentStatus -ne "Succeeded") {
-        Write-Verbose "Last deployment of Resource Group '$resourceGroupName' did not succeed ('$lastDeploymentStatus'), ingoring this deployment and finding latest succesful deployment"
+        Write-Verbose "Deployment '$deploymentName' of Resource Group '$resourceGroupName' did not succeed ('$lastDeploymentStatus'), ingoring this deployment and finding latest succesful deployment"
     }
     $lastResourceGroupDeployments = $lastResourceGroupDeployments | Where-Object {$_.ProvisioningState -eq "Succeeded"} 
 }
@@ -20,12 +21,13 @@ if (!$lastResourceGroupDeployment) {
 }
 
 $lastDeploymentStatus = $lastResourceGroupDeployment.ProvisioningState
+$deploymentName = $lastResourceGroupDeployment.DeploymentName
 if ($whenLastDeploymentIsFailed -eq "fail" -and $lastDeploymentStatus -ne "Succeeded") {
-    throw "Last deployment of Resource Group '$resourceGroupName' did not succeed (status '$lastDeploymentStatus')"
+    throw "Deployment '$deploymentName' of Resource Group '$resourceGroupName' did not succeed (status '$lastDeploymentStatus')"
 }
 
 if (!$lastResourceGroupDeployment.Outputs) {
-    Write-Warning "No output parameters could be found for the last deployment of Resource Group '$resourceGroupName'."
+    Write-Warning "No output parameters could be found for the deployment '$deploymentName' of Resource Group '$resourceGroupName'."
     return;
 }
 
