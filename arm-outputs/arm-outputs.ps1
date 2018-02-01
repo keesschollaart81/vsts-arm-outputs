@@ -2,7 +2,7 @@ Write-Verbose "Entering script arm-outputs.ps1"
  
 Write-Debug "ResourceGroupName= $resourceGroupName"
 
-$lastResourceGroupDeployments = Get-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName | Sort-Object Timestamp -Descending       
+$lastResourceGroupDeployments = Get-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName | where {$_.DeploymentName -match $deploymentNameFilter -or $deploymentNameFilter -eq $null} | Sort-Object Timestamp -Descending        
 $lastResourceGroupDeployment = $lastResourceGroupDeployments | Select-Object -First 1      
 
 if ($whenLastDeploymentIsFailed -eq "latestSuccesful" ) {
