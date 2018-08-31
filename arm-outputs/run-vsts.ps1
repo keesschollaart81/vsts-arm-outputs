@@ -1,12 +1,27 @@
+[CmdletBinding(DefaultParameterSetName = 'None')]
+param
+(
+	[String] [Parameter(Mandatory = $true)]
+	$ConnectedServiceNameSelector,
+
+	[String] [Parameter(Mandatory = $true)]
+	$ConnectedServiceNameARM,
+
+	[String] [Parameter(Mandatory = $true)]
+	$resourceGroupName,
+
+	[String] [Parameter(Mandatory = $false)]
+	$prefix,
+
+	[String] [Parameter(Mandatory = $false)]
+	$outputNames,
+
+	[String] [Parameter(Mandatory = $true)]
+	$whenLastDeploymentIsFailed,
+
+	[String] [Parameter(Mandatory = $false)]
+	$deploymentNameFilter 
+)
 Write-Verbose "Entering script run-vsts.ps1"
-
-Import-Module $PSScriptRoot\ps_modules\VstsAzureHelpers_
-Initialize-Azure
-
-$resourceGroupName = Get-VstsInput -Name resourceGroupName -Require
-$prefix = Get-VstsInput -Name prefix
-$outputNames = Get-VstsInput -Name outputNames
-$whenLastDeploymentIsFailed = Get-VstsInput -Name whenLastDeploymentIsFailed
-$deploymentNameFilter = Get-VstsInput -Name deploymentNameFilter
 
 .\arm-outputs.ps1

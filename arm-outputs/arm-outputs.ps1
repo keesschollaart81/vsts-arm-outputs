@@ -52,6 +52,6 @@ foreach ($key in $lastResourceGroupDeployment.Outputs.Keys) {
     }
     else {
         Write-Verbose "Updating VSTS variable '$key' to value '$value'"
-        Write-Host "##vso[task.setvariable variable=$prefix$key;$isSecret]$value" 
+        Write-Host "##vso[task.setvariable variable=$prefix$key;isOutput=true;]$value" 
     }
 }
