@@ -2,7 +2,7 @@
     "id": "584bcff2-3353-4f11-872b-6ba01267a972",
     "name": "ARM Outputs",
     "friendlyName": "ARM Outputs",
-    "description": "This task reads the output values of an ARM deployment and sets them as VSTS variable",
+    "description": "This task reads the output values of an ARM deployment and sets them as VSTS variables.",
     "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
     "category": "Deploy",
     "visibility": [
@@ -13,7 +13,7 @@
     "version": {
         "Major": 4,
         "Minor": 0,
-        "Patch": 0
+        "Patch": 1
     },
     "demands": [
         "azureps"
@@ -54,14 +54,14 @@
             "type": "string",
             "label": "Prefix",
             "required": false,
-            "helpMarkDown": "Provide a prefix for all VSTS variable to set (prefix is add to the key/name of the ARM output(s)"
+            "helpMarkDown": "Provide a prefix for all VSTS variable to set (the prefix is added to the key/name of the ARM output(s))."
         },
         {
             "name": "outputNames",
             "type": "string",
             "label": "Outputs to process",
             "required": false,
-            "helpMarkDown": "Provide a comma seperated list of ARM outputs (key/name) to process. If left empty, all outputs are processed"
+            "helpMarkDown": "Provide a comma-separated list of ARM outputs (key/name) to process. If left empty, all outputs are processed."
         },
         {
             "name": "whenLastDeploymentIsFailed",
@@ -69,10 +69,10 @@
             "label": "When last deployment is failed",
             "defaultValue": "fail",
             "required": true,
-            "helpMarkDown": "Choose the behaviour when the latest deployment is not succesful.",
+            "helpMarkDown": "Choose the behaviour when the latest deployment is not successful.",
             "options": {
                 "fail": "Fail task",
-                "latestSuccesful": "Use last succesful deploment"
+                "latestSuccesful": "Use last successful deploment"
             }
         },
         {
@@ -80,7 +80,7 @@
             "type": "string",
             "label": "Filter deployment name",
             "required": false,
-            "helpMarkDown": "Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in VSTS are the name of the json file plus date and time, so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter."
+            "helpMarkDown": "Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in VSTS are the name of the JSON file plus the date and time, so a file `CreateKeyVault.json` could have a deployment name of `CreateKeyVault-20180025-151538-0688`. In this case, if you want to filter to deployments of this file enter `CreateKeyVault` as the filter."
         }
     ],
     "dataSourceBindings": [
