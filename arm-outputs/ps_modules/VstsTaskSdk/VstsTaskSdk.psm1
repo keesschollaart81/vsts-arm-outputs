@@ -12,6 +12,13 @@ if ($host.Name -ne 'ConsoleHost') {
 [bool]$script:nonInteractive = "$($ModuleParameters['NonInteractive'])" -eq 'true'
 Write-Verbose "NonInteractive: $script:nonInteractive"
 
+# VstsTaskSdk.dll contains the TerminationException and NativeMethods for handle long path
+# We used to do inline C# in this powershell module
+# However when csc compile the inline C#, it will hit process env block size limit since it's not use unicode to encode env
+# To solve the env block size problem, we choose to put all inline C# into an assembly VstsTaskSdk.dll, signing it, package with the PS modules.
+Write-Verbose "Loading compiled helper $PSScriptRoot\VstsTaskSdk.dll."
+Add-Type -LiteralPath $PSScriptRoot\VstsTaskSdk.dll
+
 # Import/export functions.
 . "$PSScriptRoot\FindFunctions.ps1"
 . "$PSScriptRoot\InputFunctions.ps1"
@@ -31,6 +38,8 @@ Export-ModuleMember -Function @(
         'Select-Match'
         # Input functions.
         'Get-Endpoint'
+        'Get-SecureFileTicket'
+        'Get-SecureFileName'
         'Get-Input'
         'Get-TaskVariable'
         'Get-TaskVariableInfo'
@@ -45,6 +54,8 @@ Export-ModuleMember -Function @(
         'Write-AddBuildTag'
         'Write-AssociateArtifact'
         'Write-LogDetail'
+        'Write-PrependPath'
+        'Write-SetEndpoint'
         'Write-SetProgress'
         'Write-SetResult'
         'Write-SetSecret'
@@ -54,8 +65,11 @@ Export-ModuleMember -Function @(
         'Write-TaskVerbose'
         'Write-TaskWarning'
         'Write-UpdateBuildNumber'
+        'Write-UpdateReleaseName'
         'Write-UploadArtifact'
         'Write-UploadBuildLog'
+        'Write-UploadFile'
+        'Write-UploadSummary'
         # Out functions.
         'Out-Default'
         # Server OM functions.
@@ -65,27 +79,18 @@ Export-ModuleMember -Function @(
         'Get-VssCredentials'
         'Get-VssHttpClient'
         # Tool functions.
+        'Assert-Agent'
         'Assert-Path'
         'Invoke-Tool'
         # Trace functions.
         'Trace-EnteringInvocation'
         'Trace-LeavingInvocation'
         'Trace-Path'
+        # Proxy functions
+        'Get-WebProxy'
+        # Client cert functions
+        'Get-ClientCertificate'
     )
-
-# Special internal exception type to control the flow. Not currently intended
-# for public usage and subject to change. If the type has already
-# been loaded once, then it is not loaded again.
-Write-Verbose "Adding exceptions types."
-Add-Type -WarningAction SilentlyContinue -Debug:$false -TypeDefinition @'
-namespace VstsTaskSdk
-{
-    public class TerminationException : System.Exception
-    {
-        public TerminationException(System.String message) : base(message) { }
-    }
-}
-'@
 
 # Override Out-Default globally.
 $null = New-Item -Force -Path "function:\global:Out-Default" -Value (Get-Command -CommandType Function -Name Out-Default -ListImported)

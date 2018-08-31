@@ -19,11 +19,10 @@ $endpoint = @{
     Data = @{
         SubscriptionId = 'Some subscription ID'
         SubscriptionName = 'Some subscription name'
+        Environment = 'AzureStack'
     }
 }
 $variableSets = @(
-    @{ Classic = $true ; StorageAccount = $null }
-    @{ Classic = $true ; StorageAccount = 'Some storage account' }
     @{ Classic = $false ; StorageAccount = $null }
 )
 foreach ($variableSet in $variableSets) {
@@ -38,6 +37,7 @@ foreach ($variableSet in $variableSets) {
     Register-Mock Set-CurrentAzureSubscription
     Register-Mock Set-CurrentAzureRMSubscription
     Register-Mock Set-UserAgent
+    Register-Mock Add-AzureStackAzureRmEnvironment
     if ($variableSet.Classic) {
         & $module {
             $script:azureModule = @{ Version = [version]'0.9.8' }
@@ -77,6 +77,8 @@ foreach ($variableSet in $variableSets) {
             $args[4] -is [pscredential] -and
             $args[4].UserName -eq 'Some service principal ID' -and
             $args[4].GetNetworkCredential().Password -eq 'Some service principal key'
+            $args[5] -eq '-Environment'
+            $args[6] -eq 'AzureStack'
         }
         Assert-WasCalled Set-CurrentAzureRMSubscription -- -SubscriptionId $endpoint.Data.SubscriptionId -TenantId $endpoint.Auth.Parameters.TenantId
     }
