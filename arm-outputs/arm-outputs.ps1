@@ -1,43 +1,27 @@
-function Get-Properties($Object, $MaxLevels="5", $PathName = "", $Level=0)
+function Get-Properties($Object, $MaxLevels="7", $PathName = "", $Level=0)
 {
-    <#
-        .SYNOPSIS
-
-        .DESCRIPTION
-
-        .PARAMETER Object
-
-        .PARAMETER MaxLevels
-
-        .PARAMETER PathName
-
-        .PARAMETER Level
-     #>
- 
     $rootProps = $Object | Get-Member -ErrorAction SilentlyContinue | Where-Object { $_.MemberType -match "Property"} 
     
     foreach($prop in $rootProps) {
-
         $propValue = $Object | Select-Object -ExpandProperty $prop.Name
+        $nameWithParents = "$PathName.$($prop.Name)"
 
-        $nameWithParents =  $prop.Name
-        if ($Level -gt -1){
-            $nameWithParents = ($PathName + "." + $prop.Name)
-        } 
-        if ($propValue.GetType().ToString() -eq "System.Management.Automation.PSCustomObject"){
-            Get-Properties -Object $propValue -PathName $nameWithParents -Level ($Level + 1) -MaxLevels $MaxLevels 
-        } 
-        else{
-            if ($propValue.GetType().ToString() -eq "System.Object[]"){ 
+        switch ($propValue.GetType().ToString())
+        {
+            "System.Management.Automation.PSCustomObject" { 
+                Get-Properties -Object $propValue -PathName $nameWithParents -Level ($Level + 1) -MaxLevels $MaxLevels 
+            }
+            "System.Object[]"{
                 For ($i=0; $i -lt $propValue.Length; $i++) {
-                    Get-Properties -Object $propValue[$i] -PathName ($nameWithParents + "["+$i+"]") -Level ($Level + 1) -MaxLevels $MaxLevels 
+                    $nameWihtArrayIndex = "$nameWithParents[$i]"
+                    Get-Properties -Object $propValue[$i] -PathName $nameWihtArrayIndex -Level ($Level + 1) -MaxLevels $MaxLevels 
                 }
             }
-            else{
+            default{
                 Write-Verbose "Updating VSTS variable '$nameWithParents' to value '$propValue'"
                 Write-Host "##vso[task.setvariable variable=$prefix$nameWithParents;isOutput=true;]$propValue"  
             }
-        }
+        } 
     }
 }
 
