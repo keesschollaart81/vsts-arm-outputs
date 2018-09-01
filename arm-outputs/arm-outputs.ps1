@@ -1,3 +1,49 @@
+#Import-Module .\GetProperties
+
+function Get-Properties($Object, $MaxLevels="5", $PathName = "", $Level=0)
+{
+    <#
+        .SYNOPSIS
+
+        .DESCRIPTION
+
+        .PARAMETER Object
+
+        .PARAMETER MaxLevels
+
+        .PARAMETER PathName
+
+        .PARAMETER Level
+     #>
+ 
+    $rootProps = $Object | Get-Member -ErrorAction SilentlyContinue | Where-Object { $_.MemberType -match "Property"} 
+    
+    foreach($prop in $rootProps) {
+
+        $propValue = $Object | Select-Object -ExpandProperty $prop.Name
+
+        $nameWithParents =  $prop.Name
+        if ($Level -gt 0){
+            $nameWithParents = ($PathName + "." + $prop.Name)
+        } 
+        if ($propValue.GetType().ToString() -eq "System.Management.Automation.PSCustomObject"){
+            Get-Properties -Object $propValue -PathName $nameWithParents -Level ($Level + 1) -MaxLevels $MaxLevels 
+        } 
+        else{
+            if ($propValue.GetType().ToString() -eq "System.Object[]"){
+                foreach($arrayItem in $propValue) {
+                    Get-Properties -Object $arrayItem -PathName $nameWithParents + "[]" -Level ($Level + 1) -MaxLevels $MaxLevels 
+                }
+            }
+            else{
+                Write-Verbose "Updating VSTS variable '$nameWithParents' to value '$propValue'"
+                Write-Host "##vso[task.setvariable variable=$prefix$nameWithParents;isOutput=true;]$propValue"  
+            }
+        }
+    }
+}
+Export-ModuleMember -Function 'Get-Properties'
+
 Write-Verbose "Entering script arm-outputs.ps1"
  
 Write-Debug "ResourceGroupName= $resourceGroupName"
@@ -51,7 +97,14 @@ foreach ($key in $lastResourceGroupDeployment.Outputs.Keys) {
         Write-Verbose "Variable '$key' is of type SecureString, ignoring..."
     }
     else {
-        Write-Verbose "Updating VSTS variable '$key' to value '$value'"
-        Write-Host "##vso[task.setvariable variable=$prefix$key;isOutput=true;]$value" 
+        if ($value.GetType().FullName -eq "Newtonsoft.Json.Linq.JObject"){
+            $objectOutput = ConvertFrom-Json $value.ToString() 
+            Get-Properties $objectOutput
+        }
+        else{
+            Write-Verbose "Updating VSTS variable '$key' to value '$value'"
+            Write-Host "##vso[task.setvariable variable=$prefix$key;isOutput=true;]$value" 
+        }        
     }
 }
+
