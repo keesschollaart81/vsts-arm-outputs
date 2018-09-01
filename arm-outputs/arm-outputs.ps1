@@ -1,5 +1,3 @@
-#Import-Module .\GetProperties
-
 function Get-Properties($Object, $MaxLevels="5", $PathName = "", $Level=0)
 {
     <#
@@ -23,16 +21,16 @@ function Get-Properties($Object, $MaxLevels="5", $PathName = "", $Level=0)
         $propValue = $Object | Select-Object -ExpandProperty $prop.Name
 
         $nameWithParents =  $prop.Name
-        if ($Level -gt 0){
+        if ($Level -gt -1){
             $nameWithParents = ($PathName + "." + $prop.Name)
         } 
         if ($propValue.GetType().ToString() -eq "System.Management.Automation.PSCustomObject"){
             Get-Properties -Object $propValue -PathName $nameWithParents -Level ($Level + 1) -MaxLevels $MaxLevels 
         } 
         else{
-            if ($propValue.GetType().ToString() -eq "System.Object[]"){
-                foreach($arrayItem in $propValue) {
-                    Get-Properties -Object $arrayItem -PathName $nameWithParents + "[]" -Level ($Level + 1) -MaxLevels $MaxLevels 
+            if ($propValue.GetType().ToString() -eq "System.Object[]"){ 
+                For ($i=0; $i -lt $propValue.Length; $i++) {
+                    Get-Properties -Object $propValue[$i] -PathName ($nameWithParents + "["+$i+"]") -Level ($Level + 1) -MaxLevels $MaxLevels 
                 }
             }
             else{
@@ -42,7 +40,6 @@ function Get-Properties($Object, $MaxLevels="5", $PathName = "", $Level=0)
         }
     }
 }
-Export-ModuleMember -Function 'Get-Properties'
 
 Write-Verbose "Entering script arm-outputs.ps1"
  
@@ -99,7 +96,7 @@ foreach ($key in $lastResourceGroupDeployment.Outputs.Keys) {
     else {
         if ($value.GetType().FullName -eq "Newtonsoft.Json.Linq.JObject"){
             $objectOutput = ConvertFrom-Json $value.ToString() 
-            Get-Properties $objectOutput
+            Get-Properties -Object $objectOutput -PathName $key -Level 0 -MaxLevels 5 
         }
         else{
             Write-Verbose "Updating VSTS variable '$key' to value '$value'"
