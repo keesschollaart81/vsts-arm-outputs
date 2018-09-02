@@ -1,6 +1,6 @@
 Write-Verbose "Entering script Out-ARMOutput.ps1"
 
-. .\Select-Outputs.ps1
+. .\Select-OutputsFromObjectTree.ps1
  
 Write-Debug "ResourceGroupName= $resourceGroupName"
 
@@ -74,5 +74,5 @@ $lastResourceGroupDeployment.Outputs.GetEnumerator() | ForEach-Object {
 
 $Outputs | ForEach-Object { 
     Write-Verbose "Updating VSTS variable '$($_.Key)' to value '$($_.Value)'"
-    Write-Output "##vso[task.setvariable variable=$prefix$($_.Key);isOutput=true;]$($_.Value)"  
+    Write-Host "##vso[task.setvariable variable=$prefix$($_.Key);]$($_.Value)"  
 }

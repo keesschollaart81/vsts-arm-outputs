@@ -57,11 +57,11 @@ If your output is not a single value but a complex type, like:
 This will result in the following 5 variables:
 
 ```
-complex.second.foo => bar
-complex.second.oops.array[0].asd => qqq
-complex.second.oops.array[1].efg => aaa
-complex.second.oops.asdasdasd => True
-complex.someKey => someValue
+complex_someKey => someValue
+complex_second_foo => bar
+complex_second_oops_asdasdasd => True
+complex_second_oops_array[0]_asd => qqq
+complex_second_oops_array[1]_efg => aaa
 ```
 
 ## Help & Contact

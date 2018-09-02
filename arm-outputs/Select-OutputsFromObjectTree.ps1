@@ -5,7 +5,7 @@ function Select-OutputsFromObjectTree($Object, $MaxLevels="7", $PathName = "", $
     $OutputArray = @()
  
     $Object | Get-Member | Where-Object { $_.MemberType -match "Property"} | ForEach-Object { 
-        $key = "$PathName.$($_.Name)"
+        $key = "$($PathName)_$($_.Name)"
         $value = $Object | Select-Object -ExpandProperty $_.Name
 
         switch ($value.GetType().ToString())
@@ -15,7 +15,7 @@ function Select-OutputsFromObjectTree($Object, $MaxLevels="7", $PathName = "", $
             }
             "System.Object[]"{
                 For ($i=0; $i -lt $value.Length; $i++) { 
-                    $OutputArray += Select-OutputsFromObjectTree -Object $value[$i] -PathName "$key[$i]" -Level ($Level + 1) -MaxLevels $MaxLevels 
+                    $OutputArray += Select-OutputsFromObjectTree -Object $value[$i] -PathName "$($key)_$i" -Level ($Level + 1) -MaxLevels $MaxLevels 
                 }
             }
             default{
