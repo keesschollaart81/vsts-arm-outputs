@@ -24,4 +24,4 @@ param
 )
 Write-Verbose "Entering script run-vsts.ps1"
 
-.\arm-outputs.ps1
+.\Out-ARMOutput.ps1

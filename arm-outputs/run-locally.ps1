@@ -4,4 +4,4 @@ $resourceGroupName = "Home-Assistant-Backend"
 $prefix = $null
 [Array]$outputNames = $null
 $deploymentNameFilter = $null
-.\arm-outputs.ps1
+.\Out-ARMOutput.ps1
