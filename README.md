@@ -35,7 +35,7 @@ Optional string to filter deployments by. This can be useful if you have concurr
 ## Complex outputs
 
 If your output is not a single value but a complex type, like:
-```
+``` json
 {
    "someKey":"someValue",
    "second":{
@@ -56,11 +56,13 @@ If your output is not a single value but a complex type, like:
 ````
 This will result in the following 5 variables:
 
+```
 complex.second.foo => bar
 complex.second.oops.array[0].asd => qqq
 complex.second.oops.array[1].efg => aaa
 complex.second.oops.asdasdasd => True
 complex.someKey => someValue
+```
 
 ## Help & Contact
 
