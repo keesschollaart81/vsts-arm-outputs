@@ -1,5 +1,7 @@
 # ARM Outputs
 
+[Click here to view this extension in the VSTS Marketplace](https://marketplace.visualstudio.com/items?itemName=keesschollaart.arm-outputs)
+
 This extension enables you to use the ARM Deployment outputs in your VSTS environment.
 
 This step will use the last successful deployment within the selected resource group. If this deployent has outputs, all of them are copied to VSTS variables by the ARM Output key.
