@@ -58,39 +58,47 @@ Optional string to filter deployments by. This can be useful if you have concurr
 
 ## Complex outputs
 
-If your output is not a single value but a complex type, like:
+If your output is not a single value but a complex type, like ```second``` in this example:
+
 ``` json
 {
     "parameters": {},
     "resources": {},
     "outputs": {
-        "someKey":"someValue",
-        "second": {
-            "foo":"bar",
-            "oops": {
-                "asdasdasd":true,
-                "array": [
-                    {
-                        "asd":"qqq"
-                    },
-                    {
-                        "efg":"aaa"
-                    }
-                ]
+        "simple": "value",
+        "complex": {
+            "someKey":"someValue",
+            "second": {
+                "foo":"bar",
+                "oops": {
+                    "asdasdasd":true,
+                    "arrayName": [
+                        {
+                            "asd":"qqq"
+                        },
+                        {
+                            "efg":"aaa"
+                        }
+                    ]
+                }
             }
         }
     }
 }
 ````
+
 This will result in the following 5 variables:
 
 ```
+simple => value
 complex_someKey => someValue
 complex_second_foo => bar
 complex_second_oops_asdasdasd => True
-complex_second_oops_array_0_asd => qqq
-complex_second_oops_array_1_efg => aaa
+complex_second_oops_arrayName_0_asd => qqq
+complex_second_oops_arrayName_1_efg => aaa
 ```
+
+Note that names are seperated using an underscore and arrays are indexed.
 
 ## Help & Contact
 
