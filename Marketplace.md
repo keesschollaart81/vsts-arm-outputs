@@ -12,12 +12,12 @@ Usually this task is ran directly after the 'Azure Resource Group Deployment' ta
 
 ## Release notes
 
-### Version 4.0 - 02-09-2018
+### Version 4.0 - 03-09-2018
 
 - Support for complex outputs
 - Now based on AzurePowershell task handler 
     - Improved performance
-    - Less dependencies 
+    - Less dependencies
     - Easier to port to Linux agents Powershell Core on VSTS becomes a thing 
 
 ### Version 3.0 - 01-02-2018
@@ -30,7 +30,7 @@ Usually this task is ran directly after the 'Azure Resource Group Deployment' ta
 
 ### Version 1.0 - 13-04-2017
 
-- LastDeploymentBehaviour added
+- Initial version
 
 ## Parameter usage
 
