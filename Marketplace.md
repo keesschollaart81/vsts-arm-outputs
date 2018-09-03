@@ -60,25 +60,27 @@ Optional string to filter deployments by. This can be useful if you have concurr
 
 If your output is not a single value but a complex type, like:
 ``` json
-...
-"outputs": {
-    "someKey":"someValue",
-    "second": {
-        "foo":"bar",
-        "oops": {
-            "asdasdasd":true,
-            "array": [
-                {
-                    "asd":"qqq"
-                },
-                {
-                    "efg":"aaa"
-                }
-            ]
+{
+    "parameters": {},
+    "resources": {},
+    "outputs": {
+        "someKey":"someValue",
+        "second": {
+            "foo":"bar",
+            "oops": {
+                "asdasdasd":true,
+                "array": [
+                    {
+                        "asd":"qqq"
+                    },
+                    {
+                        "efg":"aaa"
+                    }
+                ]
+            }
         }
     }
 }
-...
 ````
 This will result in the following 5 variables:
 
