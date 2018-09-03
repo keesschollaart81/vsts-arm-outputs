@@ -1,8 +1,12 @@
-Write-Verbose "Entering script arm-outputs.ps1"
+Write-Verbose "Entering script Out-ARMOutput.ps1"
+
+. .\Select-OutputsFromObjectTree.ps1
  
 Write-Debug "ResourceGroupName= $resourceGroupName"
 
-$lastResourceGroupDeployments = Get-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName | where {$_.DeploymentName -match $deploymentNameFilter -or $deploymentNameFilter -eq $null} | Sort-Object Timestamp -Descending        
+#region Get Latest Deployment
+
+$lastResourceGroupDeployments = Get-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName | Where-Object {$_.DeploymentName -match $deploymentNameFilter -or $deploymentNameFilter -eq $null} | Sort-Object Timestamp -Descending        
 $lastResourceGroupDeployment = $lastResourceGroupDeployments | Select-Object -First 1      
 
 if ($whenLastDeploymentIsFailed -eq "latestSuccesful" ) {
@@ -30,28 +34,45 @@ if (!$lastResourceGroupDeployment.Outputs) {
     Write-Warning "No output parameters could be found for the deployment '$deploymentName' of Resource Group '$resourceGroupName'."
     return;
 }
+#endregion
 
 $outputNamesArray = $null
 
 if ($outputNames) {
     $outputNamesArray = $outputNames.split(',') | ForEach-Object { $_.Trim() }
 }
-$outputNamesCount = $outputNamesArray.length
 
-foreach ($key in $lastResourceGroupDeployment.Outputs.Keys) {
-    $type = $lastResourceGroupDeployment.Outputs.Item($key).Type
-    $value = $lastResourceGroupDeployment.Outputs.Item($key).Value
+#region generate array with all outputs
 
-    if ($outputNamesCount -gt 0 -and $outputNamesArray -notcontains $key) {
-        Write-Debug "Variable '$key' is not one of the $outputNamesCount given key's to set, ignoring..."
-        continue;
+$Outputs = @()
+
+$lastResourceGroupDeployment.Outputs.GetEnumerator() | ForEach-Object {  
+    $value = $_.Value.Value 
+
+    if ($outputNamesArray.length -gt 0 -and $outputNamesArray -notcontains $_.Key) {
+        Write-Debug "Variable '$($_.Key)' is not one of the $($outputNamesArray.length) given key's to set, ignoring..."
+        return
     }
     
-    if ($type -eq "SecureString") {
-        Write-Verbose "Variable '$key' is of type SecureString, ignoring..."
-    }
-    else {
-        Write-Verbose "Updating VSTS variable '$key' to value '$value'"
-        Write-Host "##vso[task.setvariable variable=$prefix$key;$isSecret]$value" 
-    }
+    if ($_.Value.Type -eq "SecureString") {
+        Write-Verbose "Variable '$($_.Key)' is of type SecureString, ignoring..."
+        return
+    } 
+    
+    if ($value.GetType().Name -eq "JObject"){
+        $objectOutput = ConvertFrom-Json $value.ToString() # Is this really needed?
+        $Outputs += Select-OutputsFromObjectTree -Object $objectOutput -PathName $_.Key -Level 0 -MaxLevels 7 
+        return
+    } 
+
+    $Outputs += [PSCustomObject]@{
+        Key = $_.Key
+        Value = $value 
+    }    
+}
+#endregion
+
+$Outputs | ForEach-Object { 
+    Write-Verbose "Updating VSTS variable '$($_.Key)' to value '$($_.Value)'"
+    Write-Host "##vso[task.setvariable variable=$prefix$($_.Key);]$($_.Value)"  
 }
