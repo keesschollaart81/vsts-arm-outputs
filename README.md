@@ -36,23 +36,25 @@ Optional string to filter deployments by. This can be useful if you have concurr
 
 If your output is not a single value but a complex type, like:
 ``` json
-{
-   "someKey":"someValue",
-   "second":{
-      "foo":"bar",
-      "oops":{
-         "asdasdasd":true,
-         "array":[
-            {
-               "asd":"qqq"
-            },
-            {
-               "efg":"aaa"
-            }
-         ]
-      }
-   }
+...
+"outputs": {
+    "someKey":"someValue",
+    "second": {
+        "foo":"bar",
+        "oops": {
+            "asdasdasd":true,
+            "array": [
+                {
+                    "asd":"qqq"
+                },
+                {
+                    "efg":"aaa"
+                }
+            ]
+        }
+    }
 }
+...
 ````
 This will result in the following 5 variables:
 
@@ -60,8 +62,8 @@ This will result in the following 5 variables:
 complex_someKey => someValue
 complex_second_foo => bar
 complex_second_oops_asdasdasd => True
-complex_second_oops_array[0]_asd => qqq
-complex_second_oops_array[1]_efg => aaa
+complex_second_oops_array_0_asd => qqq
+complex_second_oops_array_1_efg => aaa
 ```
 
 ## Help & Contact
