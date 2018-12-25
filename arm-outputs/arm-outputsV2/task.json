@@ -1,0 +1,98 @@
+{
+    "id": "584bcff2-3353-4f11-872b-6ba01267a972",
+    "name": "ARM Outputs",
+    "friendlyName": "ARM Outputs",
+    "description": "This task reads the output values of an ARM deployment and sets them as Azure Pipeline variables.",
+    "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
+    "category": "Deploy",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "author": "Kees Schollaart",
+    "version": {
+        "Major": 5,
+        "Minor": 0,
+        "Patch": 0
+    },
+    "releaseNotes": "What's new in Version 5.0: <br/>&nbsp;&nbsp; Complete rewrite from PowerShell to Node to enable Linux based agents",
+    "demands": [],
+    "minimumAgentVersion": "1.95.0",
+    "inputs": [
+        {
+            "name": "ConnectedServiceNameSelector",
+            "type": "pickList",
+            "label": "Azure Connection Type",
+            "required": true,
+            "helpMarkDown": "",
+            "defaultValue": "ConnectedServiceNameARM",
+            "options": {
+                "ConnectedServiceNameARM": "Azure Resource Manager"
+            }
+        },
+        {
+            "name": "ConnectedServiceNameARM",
+            "type": "connectedService:AzureRM",
+            "label": "AzureRM Subscription",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Select the Azure Resource Manager subscription."
+        },
+        {
+            "name": "resourceGroupName",
+            "type": "pickList",
+            "label": "Resource Group",
+            "required": true,
+            "helpMarkDown": "Provide the name of the resource group.",
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
+            "name": "prefix",
+            "type": "string",
+            "label": "Prefix",
+            "required": false,
+            "helpMarkDown": "Provide a prefix for all Pipeline variable to set (the prefix is added to the key/name of the ARM output(s))."
+        },
+        {
+            "name": "outputNames",
+            "type": "string",
+            "label": "Outputs to process",
+            "required": false,
+            "helpMarkDown": "Provide a comma-separated list of ARM outputs (key/name) to process. If left empty, all outputs are processed."
+        },
+        {
+            "name": "whenLastDeploymentIsFailed",
+            "type": "pickList",
+            "label": "When last deployment is failed",
+            "defaultValue": "fail",
+            "required": true,
+            "helpMarkDown": "Choose the behaviour when the latest deployment is not successful.",
+            "options": {
+                "fail": "Fail task",
+                "latestSuccesful": "Use last successful deploment"
+            }
+        },
+        {
+            "name": "deploymentNameFilter",
+            "type": "string",
+            "label": "Filter deployment name",
+            "required": false,
+            "helpMarkDown": "Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in Azure Pipelines are the name of the JSON file plus the date and time, so a file `CreateKeyVault.json` could have a deployment name of `CreateKeyVault-20180025-151538-0688`. In this case, if you want to filter to deployments of this file enter `CreateKeyVault` as the filter."
+        }
+    ],
+    "dataSourceBindings": [
+        {
+            "target": "resourceGroupName",
+            "endpointId": "$(ConnectedServiceNameARM)",
+            "dataSourceName": "AzureResourceGroups"
+        }
+    ],
+    "instanceNameFormat": "ARM Outputs",
+    "execution": {
+        "Node": {
+            "target": "index.js"
+        }
+    }
+}

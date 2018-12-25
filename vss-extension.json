@@ -63,7 +63,12 @@
     },
     "files": [
         {
-            "path": "arm-outputs"
+            "path": "arm-outputs/arm-outputsV1/",
+            "packagePath": "/arm-outputsV1/"
+        },
+        {
+            "path": "arm-outputs/arm-outputsV2/dist/bundle",
+            "packagePath": "/arm-outputsV2/"
         },
         {
             "path": "images/screenshots-vsts-arm-outputs-2.png",
