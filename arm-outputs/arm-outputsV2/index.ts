@@ -20,6 +20,8 @@ export class AzureDevOpsArmOutputsTaskHost {
             var whenLastDeploymentIsFailedString = tl.getInput("whenLastDeploymentIsFailed", true);
             var whenLastDeploymentIsFailed = FailBehaviour[whenLastDeploymentIsFailedString];
             var deploymentNameFilter = tl.getInput("deploymentNameFilter", false);
+            
+            if (!prefix) prefix = "";
 
             var params = <ArmOutputParams>{
                 tokenCredentials: credentials,
@@ -35,7 +37,7 @@ export class AzureDevOpsArmOutputsTaskHost {
             var outputs = await armOutputs.run();
             outputs.forEach(output => {
                 console.info(`Updating Azure Pipeline variable '${output.key}' to value '${output.value}'`)
-                tl.setTaskVariable(output.key, output.value);
+                tl.setTaskVariable(output.key, output.value, false);
             });
         }
         catch (err) {

@@ -53,13 +53,13 @@ export class ArmOutputs {
             }
 
             if (outputs[output]["type"] == "String") {
-                results.push({ key: `${this.config.prefix}${output}`, value: outputs[output]["value"] });
+                results.push({ key: `${this.config.prefix}${output}`, value: `${outputs[output]["value"]}` });
             }
 
             if (outputs[output]["type"] == "Object") {
                 var flatten = this.flatten(outputs[output]["value"]);
                 for (var propery in flatten) {
-                    results.push({ key: `${this.config.prefix}${output}.${propery}`, value: flatten[propery] }); 
+                    results.push({ key: `${this.config.prefix}${output}.${propery}`, value: `${flatten[propery]}` }); 
                 }
             }
         }
