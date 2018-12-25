@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": { },
+    "variables": {  },
+    "resources": [  ],
+    "outputs": {
+      "stringKey": {
+        "type": "string",
+        "value": "stringValue"
+      },
+      "storageAccountKey": {
+        "type": "securestring",
+        "value": "this should not be visible"
+      }, 
+      "complex": {
+        "type": "object",
+        "value": {
+          "someKey": "someValue",
+          "second": {
+            "foo": "bar",
+            "oops":{
+              "asdasdasd":true,
+              "array":[
+                {"asd":"qqq"},
+                {"efg":"aaa"}
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
