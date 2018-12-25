@@ -59,7 +59,7 @@ export class ArmOutputs {
             if (outputs[output]["type"] == "Object") {
                 var flatten = this.flatten(outputs[output]["value"]);
                 for (var propery in flatten) {
-                    results.push({ key: `${this.config.prefix}${output}.${propery}`, value: `${flatten[propery]}` }); 
+                    results.push({ key: `${this.config.prefix}${output}_${propery}`, value: `${flatten[propery]}` }); 
                 }
             }
         }
