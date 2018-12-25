@@ -69,7 +69,7 @@ export class ArmOutputs {
     private flatten = (o, prefix = "", out = {}) => {
         for (var name in o) {
             if (o.hasOwnProperty(name)) {
-                typeof o[name] === "object" ? this.flatten(o[name], prefix + name + '.', out) : out[prefix + name] = o[name];
+                typeof o[name] === "object" ? this.flatten(o[name], prefix + name + '_', out) : out[prefix + name] = o[name];
             }
         }
         return out;
