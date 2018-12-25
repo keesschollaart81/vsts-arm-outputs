@@ -19,27 +19,9 @@ Usually this task is ran directly after the 'Azure Resource Group Deployment' ta
 - Rewrite to Node to enable Linux based agents
 - Updated naming (VSTS > Azure DevOps)
 
-### Version 4.0 - 03-09-2018
+Previous release info can be found on [GitHub Releases](https://github.com/keesschollaart81/vsts-arm-outputs/releases) 
 
-- Support for complex outputs
-- Now based on AzurePowershell task handler 
-    - Improved performance
-    - Less dependencies
-    - Easier to port to Linux agents Powershell Core on VSTS becomes a thing 
-
-### Version 3.0 - 01-02-2018
-
-- Filter on deployment name
-
-### Version 2.0 - 18-11-2017
-
-- LastDeploymentBehaviour added
-
-### Version 1.0 - 13-04-2017
-
-- Initial version
-
-## Parameter usage
+# Good to know
 
 ### Secrets
 
@@ -47,9 +29,12 @@ If your output is of type ```SecureString``` the output value cannot be read and
 
 You can off course output your secrets as string but then these values might be exposed in logfiles (and visible via the Azure Portal as well)
 
+
+## Parameter usage
+
 ### Prefix
 
-Using the 'prefix' parameter, it is possible to prefix the variables used within VSTS. A prefix can be used to distinct variables coming out of ARM from regular VSTS variables. A prefix can also be to prevent collisions between ARM Output names and VSTS Variable names.
+Using the 'prefix' parameter, it is possible to prefix the variables used within Pipelines. A prefix can be used to distinct variables coming out of ARM from regular Pipeline variables. A prefix can also be to prevent collisions between ARM Output names and Pipeline Variable names.
 
 ### Output Names
 
@@ -61,7 +46,7 @@ Using the 'When last deployment is failed' parameter, you can choose the behavio
 
 ### Filter deployment name
 
-Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in VSTS are the name of the json file plus date and time, so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter
+Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in Pipelines are the name of the json file plus date and time, so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter
 
 ## Complex outputs
 

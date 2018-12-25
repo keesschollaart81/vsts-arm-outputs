@@ -7,15 +7,17 @@
 [![Integration Tests](https://caseonline.vsrm.visualstudio.com/_apis/public/Release/badge/0b79a2e6-b205-45d0-a677-ad0688669d24/1/2)](https://caseonline.visualstudio.com/ARM%20Outputs/_releaseDefinition?definitionId=1)
 
 
-This extension enables you to use the ARM Deployment outputs in your VSTS environment.
+This extension enables you to use the ARM Deployment outputs in your Azure Pipelines.
 
-This step will use the last successful deployment within the selected resource group. If this deployent has outputs, all of them are copied to VSTS variables by the ARM Output key.
+This step will use the last successful deployment within the selected resource group. If this deployent has outputs, all of them are copied to Pipeline variables by the ARM Output key: 
+
+[![screenshot-1](images/screenshot.png "Screenshot-1")](images/screenshot.png)
 
 This outputs can then be used by default VSTS ways: ```$(same-key-as-in-arm-template)```
 
 Usually this task is ran directly after the 'Azure Resource Group Deployment' task.
 
-[![screenshot-1](images/screenshots-vsts-arm-outputs-1.png "Screenshot-1")](images/screenshots-vsts-arm-outputs-1.png)
+[![screenshot-2](images/screenshot2.png "Screenshot-1")](images/screenshot2.png)
 
 ## How to use
 

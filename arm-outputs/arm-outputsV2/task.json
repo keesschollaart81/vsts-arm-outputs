@@ -5,6 +5,7 @@
     "description": "This task reads the output values of an ARM deployment and sets them as Azure Pipeline variables.",
     "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
     "category": "Deploy",
+    "preview": true,
     "visibility": [
         "Build",
         "Release"
@@ -13,7 +14,7 @@
     "version": {
         "Major": 5,
         "Minor": 0,
-        "Patch": 3
+        "Patch": 4
     },
     "releaseNotes": "What's new in Version 5.0: <br/>&nbsp;&nbsp; Complete rewrite from PowerShell to Node to enable Linux based agents",
     "demands": [],
