@@ -1,8 +1,5 @@
 <h1 align="center">
-
 <img src="https://raw.githubusercontent.com/keesschollaart81/vsts-arm-outputs/dev/images/banner.png" width=500 alt="ARM Outputs Banner"/>
-<br/>
-ARM Outputs
 </h1>
 
 This extension enables you to use the ARM Deployment outputs in your Azure Pipelines.
@@ -26,15 +23,6 @@ Usually this task is ran directly after the 'Azure Resource Group Deployment' ta
 
 Previous release info can be found on [GitHub Releases](https://github.com/keesschollaart81/vsts-arm-outputs/releases) 
 
-# Good to know
-
-### Secrets
-
-If your output is of type ```SecureString``` the output value cannot be read and these outputs are therefore ignored.
-
-You can off course output your secrets as string but then these values might be exposed in logfiles (and visible via the Azure Portal as well)
-
-
 ## Parameter usage
 
 ### Prefix
@@ -53,7 +41,15 @@ Using the 'When last deployment is failed' parameter, you can choose the behavio
 
 Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in Pipelines are the name of the json file plus date and time, so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter
 
-## Complex outputs
+## Good to know
+
+### Secrets
+
+If your output is of type ```SecureString``` the output value cannot be read and these outputs are therefore ignored.
+
+You can off course output your secrets as string but then these values might be exposed in logfiles (and visible via the Azure Portal as well)
+
+### Complex outputs
 
 If your output is not a single value but a complex type, like:
 ``` json

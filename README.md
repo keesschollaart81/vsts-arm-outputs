@@ -1,17 +1,10 @@
-<h1 align="center">
-
-<img src="https://raw.githubusercontent.com/keesschollaart81/vsts-arm-outputs/dev/images/banner.png" width=500 alt="ARM Outputs Banner"/>
-<br/>
-ARM Outputs
+<h1 align="center"> 
+<img src="https://raw.githubusercontent.com/keesschollaart81/vsts-arm-outputs/dev/images/banner.png" width=500 alt="ARM Outputs Banner"/> 
 </h1>
 
 <div align="center">
 
-[![Build Status](https://caseonline.visualstudio.com/ARM%20Outputs/_apis/build/status/ARM%20Outputs-CI?branchName=dev)](https://caseonline.visualstudio.com/ARM%20Outputs/_build/latest?definitionId=19?branchName=dev)
-
-[![Dev Deploy](https://caseonline.vsrm.visualstudio.com/_apis/public/Release/badge/0b79a2e6-b205-45d0-a677-ad0688669d24/1/1)](https://caseonline.visualstudio.com/ARM%20Outputs/_releaseDefinition?definitionId=1)
-
-[![Integration Tests](https://caseonline.vsrm.visualstudio.com/_apis/public/Release/badge/0b79a2e6-b205-45d0-a677-ad0688669d24/1/2)](https://caseonline.visualstudio.com/ARM%20Outputs/_releaseDefinition?definitionId=1)
+[![Build Status](https://caseonline.visualstudio.com/ARM%20Outputs/_apis/build/status/ARM%20Outputs-CI?branchName=dev)](https://caseonline.visualstudio.com/ARM%20Outputs/_build/latest?definitionId=19?branchName=dev) [![Dev Deploy](https://caseonline.vsrm.visualstudio.com/_apis/public/Release/badge/0b79a2e6-b205-45d0-a677-ad0688669d24/1/1)](https://caseonline.visualstudio.com/ARM%20Outputs/_releaseDefinition?definitionId=1) [![Integration Tests](https://caseonline.vsrm.visualstudio.com/_apis/public/Release/badge/0b79a2e6-b205-45d0-a677-ad0688669d24/1/2)](https://caseonline.visualstudio.com/ARM%20Outputs/_releaseDefinition?definitionId=1)
 
 </div>
 
