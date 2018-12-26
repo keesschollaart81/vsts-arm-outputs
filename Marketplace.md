@@ -1,4 +1,9 @@
-# ARM Outputs
+<h1 align="center">
+
+<img src="https://raw.githubusercontent.com/keesschollaart81/vsts-arm-outputs/dev/images/banner.png" width=500 alt="ARM Outputs Banner"/>
+<br/>
+ARM Outputs
+</h1>
 
 This extension enables you to use the ARM Deployment outputs in your Azure Pipelines.
 
