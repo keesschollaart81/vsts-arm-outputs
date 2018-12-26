@@ -57,6 +57,7 @@ export class AzureDevOpsArmOutputsTaskHost {
             try {
                 let duration = Date.now() - start;
                 appInsights.trackRequest({ duration: duration, name: "ARM Outputs", url: "/", resultCode: success ? 200 : 500, success: success })
+                appInsights.flush();
             }
             catch{ }// dont let AI cause exceptions
         }
