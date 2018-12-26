@@ -1,33 +1,48 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": { },
-    "variables": {  },
-    "resources": [  ],
-    "outputs": {
-      "stringKey": {
-        "type": "string",
-        "value": "stringValue"
-      },
-      "storageAccountKey": {
-        "type": "securestring",
-        "value": "this should not be visible"
-      }, 
-      "complex": {
-        "type": "object",
-        "value": {
-          "someKey": "someValue",
-          "second": {
-            "foo": "bar",
-            "oops":{
-              "asdasdasd":true,
-              "array":[
-                {"asd":"qqq"},
-                {"efg":"aaa"}
-              ]
-            }
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "variables": {},
+  "resources": [
+    {
+      "type": "microsoft.insights/components",
+      "kind": "Node.JS",
+      "name": "arm-outputs",
+      "apiVersion": "2015-05-01",
+      "location": "westeurope",
+      "properties": {
+        "Application_Type": "Node.JS"
+      }
+    }
+  ],
+  "outputs": {
+    "stringKey": {
+      "type": "string",
+      "value": "stringValue"
+    },
+    "storageAccountKey": {
+      "type": "securestring",
+      "value": "this should not be visible"
+    },
+    "complex": {
+      "type": "object",
+      "value": {
+        "someKey": "someValue",
+        "second": {
+          "foo": "bar",
+          "oops": {
+            "asdasdasd": true,
+            "array": [
+              {
+                "asd": "qqq"
+              },
+              {
+                "efg": "aaa"
+              }
+            ]
           }
         }
       }
     }
   }
+}

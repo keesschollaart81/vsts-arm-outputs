@@ -14,7 +14,7 @@
     "version": {
         "Major": 5,
         "Minor": 0,
-        "Patch": 7
+        "Patch": 8
     },
     "releaseNotes": "Complete rewrite from PowerShell to Node to enable Linux based agents",
     "demands": [],

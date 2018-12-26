@@ -4,10 +4,14 @@ import { ArmOutputs } from './arm-outputs';
 import { ArmOutputParams } from './ArmOutputParams';
 import { FailBehaviour } from './FailBehaviour';
 import { _checkPath } from 'azure-pipelines-task-lib/internal';
+import appInsights from "./logger"
 
 export class AzureDevOpsArmOutputsTaskHost {
 
     public run = async (): Promise<void> => {
+        let start = Date.now();
+        let success = true;
+
         try {
             let connectedServiceNameARM: string = tl.getInput("ConnectedServiceNameARM");
             var endpointAuth = tl.getEndpointAuthorization(connectedServiceNameARM, true);
@@ -20,7 +24,7 @@ export class AzureDevOpsArmOutputsTaskHost {
             var whenLastDeploymentIsFailedString = tl.getInput("whenLastDeploymentIsFailed", true);
             var whenLastDeploymentIsFailed = FailBehaviour[whenLastDeploymentIsFailedString];
             var deploymentNameFilter = tl.getInput("deploymentNameFilter", false);
-            
+
             if (!prefix || prefix == "null") prefix = "";
 
             var params = <ArmOutputParams>{
@@ -42,7 +46,19 @@ export class AzureDevOpsArmOutputsTaskHost {
         }
         catch (err) {
             console.error("Unhandled exception during ARM Outputs Task", err);
+            try {
+                appInsights.trackException({ exception: err });
+                success = false;
+            }
+            catch{ } // dont let AI cause exceptions
             throw err;
+        }
+        finally {
+            try {
+                let duration = Date.now() - start;
+                appInsights.trackRequest({ duration: duration, name: "ARM Outputs", url: "/", resultCode: success ? 200 : 500, success: success })
+            }
+            catch{ }// dont let AI cause exceptions
         }
     }
 

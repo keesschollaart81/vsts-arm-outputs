@@ -7,17 +7,19 @@
   "devDependencies": {
     "@types/node": "^10.12.10",
     "@types/micromatch": "3.1.0",
+    "@types/applicationinsights": "0.20.0",
     "rimraf": "^2.6.2",
     "typescript": "3.0.3",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
     "copy-webpack-plugin": "4.6.0"
   },
-  "dependencies": { 
+  "dependencies": {
+    "applicationinsights": "^1.0.8",
     "azure-arm-resource": "7.2.1",
     "azure-pipelines-task-lib": "^2.7.5",
-    "ms-rest-azure": "2.5.9",
-    "micromatch": "3.1.10"
+    "micromatch": "3.1.10",
+    "ms-rest-azure": "2.5.9"
   },
   "name": "caseonline.azuredevops.arm-outputs",
   "private": true,
