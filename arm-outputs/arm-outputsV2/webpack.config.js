@@ -2,7 +2,7 @@ var path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './dist/index.js',
   target: 'node',
   output: {
