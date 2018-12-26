@@ -8,7 +8,7 @@ This step will use the last successful deployment within the selected resource g
 
 [![screenshot-1](images/screenshot.png "Screenshot-1")](images/screenshot.png)
 
-This outputs can then be used by default VSTS ways: ```$(same-key-as-in-arm-template)```
+This outputs can then be used by default Azure Devops Pipelines ways: ```$(same-key-as-in-arm-template)```
 
 Usually this task is ran directly after the 'Azure Resource Group Deployment' task.
 
