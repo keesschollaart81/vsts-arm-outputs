@@ -47,7 +47,9 @@ export class AzureDevOpsArmOutputsTaskHost {
         catch (err) {
             console.error("Unhandled exception during ARM Outputs Task", err);
             try {
-                appInsights.trackException({ exception: err });
+                if (tl.getVariable("arm-outputs-notelemetry")) {
+                    appInsights.trackException({ exception: err });
+                }
                 success = false;
             }
             catch{ } // dont let AI cause exceptions
@@ -56,8 +58,10 @@ export class AzureDevOpsArmOutputsTaskHost {
         finally {
             try {
                 let duration = Date.now() - start;
-                appInsights.trackRequest({ duration: duration, name: "ARM Outputs", url: "/", resultCode: success ? 200 : 500, success: success })
-                appInsights.flush();
+                if (tl.getVariable("arm-outputs-notelemetry")) {
+                    appInsights.trackRequest({ duration: duration, name: "ARM Outputs", url: "/", resultCode: success ? 200 : 500, success: success })
+                    appInsights.flush();
+                }
             }
             catch{ }// dont let AI cause exceptions
         }

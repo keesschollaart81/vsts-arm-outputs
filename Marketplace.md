@@ -49,6 +49,12 @@ If your output is of type ```SecureString``` the output value cannot be read and
 
 You can off course output your secrets as string but then these values might be exposed in logfiles (and visible via the Azure Portal as well)
 
+### Telemetry
+
+From version 5.x onwards this task sends some data to my Application Insights. You can opt-out by adding a variable in your pipeline with the name 'arm-outputs-notelemetry'
+
+The thinks I track to improve/monitor this task are: the type of host/os, the version and duration of this task and the message/callstack of exceptions when they occur. I will never send things like name/value of your tenant, subscription, resource-group or your ARM Outputs. Please don't just take my word but check [the code](https://github.com/keesschollaart81/vsts-arm-outputs/) and see the actual [deployment pipeline history](https://caseonline.visualstudio.com/ARM%20Outputs/_release?definitionId=1) for any (recent) version.
+
 ### Complex outputs
 
 If your output is not a single value but a complex type, like:
