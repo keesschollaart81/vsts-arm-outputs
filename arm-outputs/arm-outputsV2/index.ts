@@ -47,7 +47,7 @@ export class AzureDevOpsArmOutputsTaskHost {
             var outputs = await armOutputs.run();
             outputs.forEach(output => {
                 if (debugMode) {
-                    console.debug(`Updating Azure Pipeline variable '${output.key}' to value '${output.value}'`);
+                    tl.debug(`Updating Azure Pipeline variable '${output.key}' to value '${output.value}'`);
                 }
                 console.info(`Updating Azure Pipeline variable '${output.key}'`);
                 tl.setVariable(output.key, output.value, false);

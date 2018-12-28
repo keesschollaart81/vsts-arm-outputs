@@ -2,12 +2,11 @@ resources:
 - repo: self
 
 trigger:
-- master
+- master 
 - dev
 
 pr:
-- master
-- dev
+- master 
 
 queue:
   name: Hosted VS2017
