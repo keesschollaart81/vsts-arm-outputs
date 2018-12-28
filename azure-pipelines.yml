@@ -3,6 +3,7 @@ resources:
 
 trigger:
 - master
+- dev
 
 pr:
 - master
