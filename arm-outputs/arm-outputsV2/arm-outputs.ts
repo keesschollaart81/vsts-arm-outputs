@@ -42,7 +42,7 @@ export class ArmOutputs {
         var results: ArmOutputResult[] = [];
         for (var output in outputs) {
 
-            if (this.config.outputNames.length > 0 && !this.config.outputNames.some(x => x == output)) {
+            if (this.config.outputNames.length > 0 && !this.config.outputNames.some(x => x.trim() == output)) {
                 console.info(`Variable '${output}' is not one of the ${this.config.outputNames.length} given key's to set, ignoring...`);
                 continue;
             }
