@@ -12,7 +12,7 @@ This extension enables you to use the ARM Deployment outputs in your Azure Pipel
 
 </div>
 
-This step will use the last successful deployment within the selected resource group. If this deployent has outputs, all of them are copied to Pipeline variables by the ARM Output key: 
+This step will use the last successful deployment within the selected resource group. If this deployent has outputs, all of them are copied to Pipelines variables by the ARM Output key: 
 
 [![screenshot-1](images/screenshot.png "Screenshot-1")](images/screenshot.png)
 

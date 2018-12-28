@@ -2,7 +2,7 @@
     "id": "584bcff2-3353-4f11-872b-6ba01267a972",
     "name": "ARM Outputs",
     "friendlyName": "ARM Outputs",
-    "description": "This task reads the output values of an ARM deployment and sets them as Azure Pipeline variables.",
+    "description": "This task reads the output values of an ARM deployment and sets them as Azure Pipelines variables.",
     "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
     "category": "Deploy",
     "preview": true,
@@ -54,7 +54,7 @@
             "type": "string",
             "label": "Prefix",
             "required": false,
-            "helpMarkDown": "Provide a prefix for all Pipeline variable to set (the prefix is added to the key/name of the ARM output(s))."
+            "helpMarkDown": "Provide a prefix for all Pipelines variable to set (the prefix is added to the key/name of the ARM output(s))."
         },
         {
             "name": "outputNames",

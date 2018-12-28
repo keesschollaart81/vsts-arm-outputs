@@ -4,7 +4,7 @@
 
 This extension enables you to use the ARM Deployment outputs in your Azure Pipelines.
 
-This step will use the last successful deployment within the selected resource group. If this deployent has outputs, all of them are copied to Pipeline variables by the ARM Output key: 
+This step will use the last successful deployment within the selected resource group. If this deployent has outputs, all of them are copied to Pipelines variables by the ARM Output key: 
 
 [![screenshot-1](images/screenshot.png "Screenshot-1")](images/screenshot.png)
 
@@ -27,7 +27,7 @@ Previous release info can be found on [GitHub Releases](https://github.com/keess
 
 ### Prefix
 
-Using the 'prefix' parameter, it is possible to prefix the variables used within Pipelines. A prefix can be used to distinct variables coming out of ARM from regular Pipeline variables. A prefix can also be to prevent collisions between ARM Output names and Pipeline Variable names.
+Using the 'prefix' parameter, it is possible to prefix the variables used within Pipelines. A prefix can be used to distinct variables coming out of ARM from regular Pipelines variables. A prefix can also be to prevent collisions between ARM Output names and Pipelines Variable names.
 
 ### Output Names
 
@@ -51,9 +51,9 @@ You can off course output your secrets as string but then these values might be 
 
 ### Telemetry
 
-From version 5.x onwards this task sends some data to my Application Insights. You can opt-out by adding a variable in your pipeline with the name 'arm-outputs-notelemetry'
+From version 5.x onwards this task sends some data to my Application Insights. You can opt-out by adding a variable in your pipelines with the name 'arm-outputs-notelemetry'
 
-The thinks I track to improve/monitor this task are: the type of host/os, the version and duration of this task and the message/callstack of exceptions when they occur. I will never send things like name/value of your tenant, subscription, resource-group or your ARM Outputs. Please don't just take my word but check [the code](https://github.com/keesschollaart81/vsts-arm-outputs/) and see the actual [deployment pipeline history](https://caseonline.visualstudio.com/ARM%20Outputs/_release?definitionId=1) for any (recent) version.
+The thinks I track to improve/monitor this task are: the type of host/os, the version and duration of this task and the message/callstack of exceptions when they occur. I will never send things like name/value of your tenant, subscription, resource-group or your ARM Outputs. Please don't just take my word but check [the code](https://github.com/keesschollaart81/vsts-arm-outputs/) and see the actual [deployment pipelines history](https://caseonline.visualstudio.com/ARM%20Outputs/_release?definitionId=1) for any (recent) version.
 
 ### Complex outputs
 
