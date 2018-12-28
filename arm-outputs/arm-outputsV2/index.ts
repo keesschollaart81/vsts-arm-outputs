@@ -55,15 +55,15 @@ export class AzureDevOpsArmOutputsTaskHost {
             catch{ } // dont let AI cause exceptions
             throw err;
         }
-        finally {
-            try {
+        finally { 
                 let duration = Date.now() - start;
+                console.log(`whats wrong with the logging ${tl.getVariable("arm-outputs-notelemetry")}`)
                 if (!tl.getVariable("arm-outputs-notelemetry")) {
+                    console.log("not much");
                     appInsights.trackRequest({ duration: duration, name: "ARM Outputs", url: "/", resultCode: success ? 200 : 500, success: success })
                     appInsights.flush();
-                }
-            }
-            catch{ }// dont let AI cause exceptions
+                    console.log("or is it?");
+                } 
         }
     }
 
