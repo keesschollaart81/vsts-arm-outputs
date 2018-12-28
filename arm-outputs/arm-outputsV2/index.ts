@@ -30,7 +30,7 @@ export class AzureDevOpsArmOutputsTaskHost {
             const debugModeString: string = tl.getVariable('System.Debug');
             const debugMode: boolean = debugModeString ? debugModeString.toLowerCase() != 'false' : false;
             if (debugMode) {
-                tl.warning("You are running in debug mode, ARM Outputs will print the values of your ARM Outputs to the log. If there are secrets, they will be shown, be careful (especially with public projects)!");
+                tl.warning("You are running in debug mode (variable System.Debug is set to true), ARM Outputs will print the values of your ARM Outputs to the log. If your deployment outputs any secret values, they will be shown, be careful (especially with public projects)!");
             }
 
             var params = <ArmOutputParams>{
@@ -45,10 +45,7 @@ export class AzureDevOpsArmOutputsTaskHost {
 
             var armOutputs = new ArmOutputs(params);
             var outputs = await armOutputs.run();
-            outputs.forEach(output => {
-                if (debugMode) {
-                    tl.debug(`Updating Azure Pipeline variable '${output.key}' to value '${output.value}'`);
-                }
+            outputs.forEach(output => { 
                 console.info(`Updating Azure Pipeline variable '${output.key}'`);
                 tl.setVariable(output.key, output.value, false);
             });
