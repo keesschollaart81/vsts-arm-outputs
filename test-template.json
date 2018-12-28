@@ -24,6 +24,10 @@
       "type": "securestring",
       "value": "this should not be visible"
     },
+    "arrayTest": {
+      "type": "array",
+      "value": "['test1','test2']"
+    },
     "complex": {
       "type": "object",
       "value": {

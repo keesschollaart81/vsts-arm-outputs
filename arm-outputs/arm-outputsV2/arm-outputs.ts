@@ -37,7 +37,7 @@ export class ArmOutputs {
         var outputs = deployments[0].properties.outputs;
         if (!outputs) {
             throw new Error(`No output parameters could be found for the deployment '${deployments[0].name}' of Resource Group '${this.config.resourceGroupName}'."`)
-        } 
+        }
 
         var results: ArmOutputResult[] = [];
         for (var output in outputs) {
@@ -56,10 +56,10 @@ export class ArmOutputs {
                 results.push({ key: `${this.config.prefix}${output}`, value: `${outputs[output]["value"]}` });
             }
 
-            if (outputs[output]["type"] == "Object") {
+            if (outputs[output]["type"] == "Object" || outputs[output]["type"] == "Array") {
                 var flatten = this.flatten(outputs[output]["value"]);
                 for (var propery in flatten) {
-                    results.push({ key: `${this.config.prefix}${output}_${propery}`, value: `${flatten[propery]}` }); 
+                    results.push({ key: `${this.config.prefix}${output}_${propery}`, value: `${flatten[propery]}` });
                 }
             }
         }
