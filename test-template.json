@@ -26,7 +26,10 @@
     },
     "arrayTest": {
       "type": "array",
-      "value": "['test1','test2']"
+      "value": [
+        "test1",
+        "test2"
+      ]
     },
     "complex": {
       "type": "object",
