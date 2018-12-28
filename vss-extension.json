@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "arm-outputs",
     "name": "ARM Outputs",
-    "version": "4.0.1",
+    "version": "5.0.22",
     "publisher": "keesschollaart",
     "public": true,
     "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
@@ -11,9 +11,9 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
-    "description": "This extension reads the output values of an ARM deployment and sets them as VSTS variable",
+    "description": "This extension reads the output values of an ARM deployment and sets them as Azure Pipelines variable",
     "categories": [
-        "Build and release"
+        "Azure Pipelines"
     ],
     "tags": [
         "azure",
@@ -31,10 +31,10 @@
     ],
     "screenshots": [
         {
-            "path": "images/screenshots-vsts-arm-outputs-2.png"
+            "path": "images/screenshot.png"
         },
         {
-            "path": "images/screenshots-vsts-arm-outputs-1.png"
+            "path": "images/screenshot2.png"
         }
     ],
     "content": {
@@ -51,6 +51,9 @@
         },
         "support": {
             "uri": "https://github.com/keesschollaart81/vsts-arm-outputs"
+        },
+        "issues": {
+          "uri": "https://github.com/keesschollaart81/vsts-arm-outputs/issues"
         }
     },
     "branding": {
@@ -63,14 +66,19 @@
     },
     "files": [
         {
-            "path": "arm-outputs"
+            "path": "arm-outputs/arm-outputsV1/",
+            "packagePath": "/arm-outputs/arm-outputsV1/"
         },
         {
-            "path": "images/screenshots-vsts-arm-outputs-2.png",
+            "path": "arm-outputs/arm-outputsV2/dist/bundle",
+            "packagePath": "/arm-outputs/arm-outputsV2/"
+        },
+        {
+            "path": "images/screenshot.png",
             "addressable": true
         },
         {
-            "path": "images/screenshots-vsts-arm-outputs-1.png",
+            "path": "images/screenshot2.png",
             "addressable": true
         },
         {

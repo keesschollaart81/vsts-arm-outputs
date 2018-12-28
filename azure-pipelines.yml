@@ -1,0 +1,45 @@
+resources:
+- repo: self
+
+trigger:
+- master 
+- dev
+
+pr:
+- master 
+
+queue:
+  name: Hosted VS2017
+  demands: npm
+
+steps:
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: 'arm-outputs/arm-outputsV2/' 
+    verbose: false 
+
+- task: Npm@1
+  displayName: 'npm run build'
+  inputs:
+    command: custom 
+    workingDir: 'arm-outputs/arm-outputsV2/' 
+    customCommand: 'run build'
+
+- task: ms-devlabs.vsts-developer-tools-build-tasks.package-extension-build-task.PackageVSTSExtension@1
+  displayName: 'Package Extension'
+ 
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+  inputs:
+    Contents: '*.vsix'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+  inputs:
+    Contents: 'test-template.json'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'

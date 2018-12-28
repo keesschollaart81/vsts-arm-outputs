@@ -1,0 +1,23 @@
+﻿{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist/",
+    "sourceMap": true,
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "es6",
+      "dom",
+      "es2015.iterable"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "**/*.ts"
+  ]
+}

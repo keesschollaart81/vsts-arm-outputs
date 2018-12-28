@@ -1,48 +1,33 @@
-# ARM Outputs
+<h1 align="center">
+<img src="https://raw.githubusercontent.com/keesschollaart81/vsts-arm-outputs/dev/images/banner.png" width=500 alt="ARM Outputs Banner"/>
+</h1>
 
-This extension enables you to use the ARM Deployment outputs in your VSTS environment.
+This extension enables you to use the ARM Deployment outputs in your Azure Pipelines.
 
-This step will use the last successful deployment within the selected resource group. If this deployent has outputs, all of them are copied to VSTS variables by the ARM Output key.
+This step will use the last successful deployment within the selected resource group. If this deployent has outputs, all of them are copied to Pipelines variables by the ARM Output key: 
 
-This outputs can then be used by default VSTS ways: ```$(same-key-as-in-arm-template)```
+[![screenshot-1](images/screenshot.png "Screenshot-1")](images/screenshot.png)
+
+This outputs can then be used by default Azure Devops Pipelines ways: ```$(same-key-as-in-arm-template)```
 
 Usually this task is ran directly after the 'Azure Resource Group Deployment' task.
 
-[![screenshot-1](images/screenshots-vsts-arm-outputs-1.png "Screenshot-1")](images/screenshots-vsts-arm-outputs-1.png)
+[![screenshot-2](images/screenshot2.png "Screenshot-1")](images/screenshot2.png)
 
 ## Release notes
 
-### Version 4.0 - 03-09-2018
+### Version 5.0 - 25-12-2018
 
-- Support for complex outputs
-- Now based on AzurePowershell task handler 
-    - Improved performance
-    - Less dependencies
-    - Easier to port to Linux agents Powershell Core on VSTS becomes a thing 
+- Rewrite to Node to enable Linux based agents
+- Updated naming (VSTS > Azure DevOps)
 
-### Version 3.0 - 01-02-2018
-
-- Filter on deployment name
-
-### Version 2.0 - 18-11-2017
-
-- LastDeploymentBehaviour added
-
-### Version 1.0 - 13-04-2017
-
-- Initial version
+Previous release info can be found on [GitHub Releases](https://github.com/keesschollaart81/vsts-arm-outputs/releases) 
 
 ## Parameter usage
 
-### Secrets
-
-If your output is of type ```SecureString``` the output value cannot be read and these outputs are therefore ignored.
-
-You can off course output your secrets as string but then these values might be exposed in logfiles (and visible via the Azure Portal as well)
-
 ### Prefix
 
-Using the 'prefix' parameter, it is possible to prefix the variables used within VSTS. A prefix can be used to distinct variables coming out of ARM from regular VSTS variables. A prefix can also be to prevent collisions between ARM Output names and VSTS Variable names.
+Using the 'prefix' parameter, it is possible to prefix the variables used within Pipelines. A prefix can be used to distinct variables coming out of ARM from regular Pipelines variables. A prefix can also be to prevent collisions between ARM Output names and Pipelines Variable names.
 
 ### Output Names
 
@@ -54,9 +39,23 @@ Using the 'When last deployment is failed' parameter, you can choose the behavio
 
 ### Filter deployment name
 
-Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in VSTS are the name of the json file plus date and time, so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter
+Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in Pipelines are the name of the json file plus date and time, so a file CreateKeyVault.json could have a deployment name of CreateKeyVault-20180025-151538-0688. In this case, if you want to filter to deployments of this file enter CreateKeyVault as the filter
 
-## Complex outputs
+## Good to know
+
+### Secrets
+
+If your output is of type ```SecureString``` the output value cannot be read and these outputs are therefore ignored.
+
+You can off course output your secrets as string but then these values might be exposed in logfiles (and visible via the Azure Portal as well)
+
+### Telemetry
+
+From version 5.x onwards this task sends some data to my Application Insights. You can opt-out by adding a variable in your pipelines with the name 'arm-outputs-notelemetry'
+
+The thinks I track to improve/monitor this task are: the type of host/os, the version and duration of this task and the message/callstack of exceptions when they occur. I will never send things like name/value of your tenant, subscription, resource-group or your ARM Outputs. Please don't just take my word but check [the code](https://github.com/keesschollaart81/vsts-arm-outputs/) and see the actual [deployment pipelines history](https://caseonline.visualstudio.com/ARM%20Outputs/_release?definitionId=1) for any (recent) version.
+
+### Complex outputs
 
 If your output is not a single value but a complex type, like ```second``` in this example:
 
