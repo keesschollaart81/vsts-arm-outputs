@@ -37,7 +37,7 @@ export class ArmOutputs {
         var outputs = deployments[0].properties.outputs;
         if (!outputs) {
             throw new Error(`No output parameters could be found for the deployment '${deployments[0].name}' of Resource Group '${this.config.resourceGroupName}'."`)
-        }
+        } 
 
         var results: ArmOutputResult[] = [];
         for (var output in outputs) {

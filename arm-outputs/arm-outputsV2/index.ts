@@ -27,6 +27,12 @@ export class AzureDevOpsArmOutputsTaskHost {
 
             if (!prefix || prefix == "null") prefix = "";
 
+            const debugModeString: string = tl.getVariable('System.Debug');
+            const debugMode: boolean = debugModeString ? debugModeString.toLowerCase() != 'false' : false;
+            if (debugMode) {
+                tl.warning("You are running in debug mode, ARM Outputs will print the values of your ARM Outputs to the log. If there are secrets, they will be shown, be careful (especially with public projects)!");
+            }
+
             var params = <ArmOutputParams>{
                 tokenCredentials: credentials,
                 subscriptionId: subscriptionId,
@@ -40,7 +46,10 @@ export class AzureDevOpsArmOutputsTaskHost {
             var armOutputs = new ArmOutputs(params);
             var outputs = await armOutputs.run();
             outputs.forEach(output => {
-                console.info(`Updating Azure Pipeline variable '${output.key}' to value '${output.value}'`)
+                if (debugMode) {
+                    console.debug(`Updating Azure Pipeline variable '${output.key}' to value '${output.value}'`);
+                }
+                console.info(`Updating Azure Pipeline variable '${output.key}'`);
                 tl.setVariable(output.key, output.value, false);
             });
         }
@@ -55,15 +64,15 @@ export class AzureDevOpsArmOutputsTaskHost {
             catch{ } // dont let AI cause exceptions
             throw err;
         }
-        finally { 
+        finally {
+            try {
                 let duration = Date.now() - start;
-                console.log(`whats wrong with the logging ${tl.getVariable("arm-outputs-notelemetry")}`)
                 if (!tl.getVariable("arm-outputs-notelemetry")) {
-                    console.log("not much");
                     appInsights.trackRequest({ duration: duration, name: "ARM Outputs", url: "/", resultCode: success ? 200 : 500, success: success })
                     appInsights.flush();
-                    console.log("or is it?");
-                } 
+                }
+            }
+            catch{ }// dont let AI cause exceptions
         }
     }
 
