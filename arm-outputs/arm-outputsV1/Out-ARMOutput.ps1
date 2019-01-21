@@ -1,5 +1,7 @@
 Write-Verbose "Entering script Out-ARMOutput.ps1"
 
+Write-Warning "You're using the old 4.* (PowerShell based) version of this task which will be removed any time soon. Please upgrade to the new 5.* version which is much faster and enables Linux based agents!"
+
 . .\Select-OutputsFromObjectTree.ps1
  
 Write-Debug "ResourceGroupName= $resourceGroupName"
