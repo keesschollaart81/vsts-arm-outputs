@@ -1,8 +1,8 @@
-import { FailBehaviour } from "./FailBehaviour";
-import * as msrestAzure from 'ms-rest-azure';
+import { FailBehaviour } from "./FailBehaviour"; 
+import { ServiceClientCredentials } from "ms-rest";
 
 export class ArmOutputParams {
-    public tokenCredentials: msrestAzure.ApplicationTokenCredentials;
+    public tokenCredentials: ServiceClientCredentials;
     public subscriptionId: string;
     public resourceGroupName: string;
     public prefix: string;

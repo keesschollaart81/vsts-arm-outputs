@@ -5,6 +5,7 @@ import { ArmOutputParams } from './ArmOutputParams';
 import { FailBehaviour } from './FailBehaviour';
 import { _checkPath } from 'azure-pipelines-task-lib/internal';
 import appInsights from "./logger"
+import { ServiceClientCredentials } from 'ms-rest';
 
 export class AzureDevOpsArmOutputsTaskHost {
 
@@ -15,7 +16,8 @@ export class AzureDevOpsArmOutputsTaskHost {
         try {
             let connectedServiceNameARM: string = tl.getInput("ConnectedServiceNameARM");
             var endpointAuth = tl.getEndpointAuthorization(connectedServiceNameARM, true);
-            var credentials = this.getCredentials(endpointAuth);
+            var authScheme = tl.getEndpointAuthorizationScheme(connectedServiceNameARM, true);
+            var credentials = this.getCredentials(endpointAuth, authScheme);
             var subscriptionId = tl.getEndpointDataParameter(connectedServiceNameARM, "SubscriptionId", true);
 
             var resourceGroupName = tl.getInput("resourceGroupName", true);
@@ -73,10 +75,18 @@ export class AzureDevOpsArmOutputsTaskHost {
         }
     }
 
-    private getCredentials = (endpointAuthorization: tl.EndpointAuthorization): msrestAzure.ApplicationTokenCredentials => {
+    private getCredentials = (endpointAuthorization: tl.EndpointAuthorization, authScheme: string): ServiceClientCredentials => {
+        if (authScheme == "ManagedServiceIdentity") {
+            console.log("Logging in using MSIVmTokenCredentials");
+            return new msrestAzure.MSIVmTokenCredentials();
+        }
+
+        console.log(`Logging in using ApplicationTokenCredentials, authScheme is '${authScheme}'`);
+
         var servicePrincipalId: string = endpointAuthorization.parameters["serviceprincipalid"];
         var servicePrincipalKey: string = endpointAuthorization.parameters["serviceprincipalkey"];
         var tenantId: string = endpointAuthorization.parameters["tenantid"];
+
         var credentials = new msrestAzure.ApplicationTokenCredentials(servicePrincipalId, tenantId, servicePrincipalKey);
 
         return credentials;
