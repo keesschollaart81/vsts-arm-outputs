@@ -16,6 +16,11 @@ Usually this task is ran directly after the 'Azure Resource Group Deployment' ta
 
 ## Release notes
 
+### Version 5.1 - 03-03-2019
+
+- Deprecation warning for the PowerShell based version
+- Support for MSI based agents
+
 ### Version 5.0 - 25-12-2018
 
 - Rewrite to Node to enable Linux based agents
