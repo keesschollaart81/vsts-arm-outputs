@@ -5,7 +5,7 @@
     "description": "This task reads the output values of an ARM deployment and sets them as Azure Pipelines variables.",
     "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
     "category": "Deploy",
-    "preview": true,
+    "preview": false,
     "visibility": [
         "Build",
         "Release"

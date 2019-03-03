@@ -8,7 +8,7 @@
 
 This extension enables you to use the ARM Deployment outputs in your Azure Pipelines.
 
-[![Build Status](https://caseonline.visualstudio.com/ARM%20Outputs/_apis/build/status/ARM%20Outputs-CI?branchName=dev)](https://caseonline.visualstudio.com/ARM%20Outputs/_build/latest?definitionId=19?branchName=dev) [![Dev Deploy](https://caseonline.vsrm.visualstudio.com/_apis/public/Release/badge/0b79a2e6-b205-45d0-a677-ad0688669d24/1/1)](https://caseonline.visualstudio.com/ARM%20Outputs/_releaseDefinition?definitionId=1) [![Production](https://caseonline.vsrm.visualstudio.com/_apis/public/Release/badge/0b79a2e6-b205-45d0-a677-ad0688669d24/1/3)](https://caseonline.visualstudio.com/ARM%20Outputs/_releaseDefinition?definitionId=1)
+[![Build Status](https://caseonline.visualstudio.com/ARM%20Outputs/_apis/build/status/ARM%20Outputs-CI?branchName=dev)](https://caseonline.visualstudio.com/ARM%20Outputs/_build/latest?definitionId=19?branchName=dev) [![Dev Deploy](https://caseonline.vsrm.visualstudio.com/_apis/public/Release/badge/0b79a2e6-b205-45d0-a677-ad0688669d24/1/1)](https://caseonline.visualstudio.com/ARM%20Outputs/_release?definitionId=1) [![Production](https://caseonline.vsrm.visualstudio.com/_apis/public/Release/badge/0b79a2e6-b205-45d0-a677-ad0688669d24/1/3)](https://caseonline.visualstudio.com/ARM%20Outputs/_release?definitionId=1)
 
 </div>
 
