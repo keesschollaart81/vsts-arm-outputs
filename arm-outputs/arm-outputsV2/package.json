@@ -19,7 +19,7 @@
     "azure-arm-resource": "7.2.1",
     "azure-pipelines-task-lib": "^2.7.5",
     "micromatch": "3.1.10",
-    "ms-rest-azure": "2.5.9"
+    "ms-rest-azure": "3.0.0"
   },
   "name": "caseonline.azuredevops.arm-outputs",
   "private": true,
