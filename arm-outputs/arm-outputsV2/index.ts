@@ -17,7 +17,8 @@ export class AzureDevOpsArmOutputsTaskHost {
             let connectedServiceNameARM: string = tl.getInput("ConnectedServiceNameARM");
             var endpointAuth = tl.getEndpointAuthorization(connectedServiceNameARM, true);
             var authScheme = tl.getEndpointAuthorizationScheme(connectedServiceNameARM, true);
-            var credentials = this.getCredentials(endpointAuth, authScheme);
+            var environmentName = tl.getEndpointDataParameter(connectedServiceNameARM, "environment", true);
+            var credentials = this.getCredentials(endpointAuth, authScheme, environmentName);
             var subscriptionId = tl.getEndpointDataParameter(connectedServiceNameARM, "SubscriptionId", true);
 
             var resourceGroupName = tl.getInput("resourceGroupName", true);
@@ -75,7 +76,7 @@ export class AzureDevOpsArmOutputsTaskHost {
         }
     }
 
-    private getCredentials = (endpointAuthorization: tl.EndpointAuthorization, authScheme: string): ServiceClientCredentials => {
+    private getCredentials = (endpointAuthorization: tl.EndpointAuthorization, authScheme: string, environmentName: string): ServiceClientCredentials => {
         if (authScheme == "ManagedServiceIdentity") {
             console.log("Logging in using MSIVmTokenCredentials");
             return new msrestAzure.MSIVmTokenCredentials();
@@ -86,10 +87,24 @@ export class AzureDevOpsArmOutputsTaskHost {
         var servicePrincipalId: string = endpointAuthorization.parameters["serviceprincipalid"];
         var servicePrincipalKey: string = endpointAuthorization.parameters["serviceprincipalkey"];
         var tenantId: string = endpointAuthorization.parameters["tenantid"];
+        var azureEnvironment: msrestAzure.AzureEnvironment = this.getEnvironment(environmentName);
+        const tokenCredentialsOptions: msrestAzure.AzureTokenCredentialsOptions = {
+            environment: azureEnvironment
+        };
 
-        var credentials = new msrestAzure.ApplicationTokenCredentials(servicePrincipalId, tenantId, servicePrincipalKey);
+        var credentials = new msrestAzure.ApplicationTokenCredentials(servicePrincipalId, tenantId, servicePrincipalKey, tokenCredentialsOptions);
 
         return credentials;
+    }
+
+    private getEnvironment = (environmentName: string): msrestAzure.AzureEnvironment => {
+        const azureEnvironmentMaps = {
+            azurechinacloud: msrestAzure.AzureEnvironment.AzureChina,
+            azurecloud: msrestAzure.AzureEnvironment.Azure,
+            azuregermancloud: msrestAzure.AzureEnvironment.AzureGermanCloud,
+            azureusgovernment: msrestAzure.AzureEnvironment.AzureUSGovernment,
+        };
+        return azureEnvironmentMaps[environmentName.toLowerCase()];
     }
 }
 var azureDevOpsArmOutputsTaskHost = new AzureDevOpsArmOutputsTaskHost();
