@@ -34,12 +34,10 @@ export class ArmOutputs {
             throw new Error(`Deployment '${deployments[0].name}' of Resource Group '${this.config.resourceGroupName}' did not succeed (status '${deployments[0].properties.provisioningState}')`);
         }
 
-        var outputs = deployments[0].properties.outputs;
-        if (!outputs) {
-            throw new Error(`No output parameters could be found for the deployment '${deployments[0].name}' of Resource Group '${this.config.resourceGroupName}'."`)
-        }
-
         var results: ArmOutputResult[] = [];
+
+        var outputs = deployments[0].properties.outputs;
+    
         for (var output in outputs) {
 
             if (this.config.outputNames.length > 0 && !this.config.outputNames.some(x => x.trim() == output)) {

@@ -48,10 +48,15 @@ export class AzureDevOpsArmOutputsTaskHost {
 
             var armOutputs = new ArmOutputs(params);
             var outputs = await armOutputs.run();
-            outputs.forEach(output => {
-                console.info(`Updating Azure Pipelines variable '${output.key}'`);
-                tl.setVariable(output.key, output.value, false);
-            });
+            
+            if (outputs && outputs.length == 0) {
+                tl.warning(`No output parameters could be found for the deployment`);
+            } else {
+                outputs.forEach(output => {
+                    console.info(`Updating Azure Pipelines variable '${output.key}'`);
+                    tl.setVariable(output.key, output.value, false);
+                });
+            }
         }
         catch (err) {
             console.error("Unhandled exception during ARM Outputs Task", err);
