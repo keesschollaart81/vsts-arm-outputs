@@ -13,8 +13,8 @@
     "author": "Kees Schollaart",
     "version": {
         "Major": 5,
-        "Minor": 0,
-        "Patch": 21
+        "Minor": 1,
+        "Patch": 0
     },
     "releaseNotes": "Complete rewrite from PowerShell to Node to enable Linux based agents",
     "demands": [],
@@ -88,7 +88,7 @@
             "label": "Azure Environment",
             "required": true,
             "defaultValue": "azurecloud",
-            "helpMarkDown": "Optional string to set the specific Azure Cloud Instance, required when using MSI to authenticate against a specific AAD.",
+            "helpMarkDown": "Set a specific Azure Cloud Instance, required when using MSI to authenticate against a specific AAD.",
             "options": {
                 "azurecloud": "Azure",
                 "azurechinacloud": "AzureChina",
