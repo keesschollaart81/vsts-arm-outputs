@@ -17,7 +17,7 @@ export class AzureDevOpsArmOutputsTaskHost {
             let connectedServiceNameARM: string = tl.getInput("ConnectedServiceNameARM");
             var endpointAuth = tl.getEndpointAuthorization(connectedServiceNameARM, true);
             var authScheme = tl.getEndpointAuthorizationScheme(connectedServiceNameARM, true);
-            var environmentName = tl.getEndpointDataParameter(connectedServiceNameARM, "environment", true);
+            var environmentName = tl.getEndpointDataParameter(connectedServiceNameARM, "environment", false);
             var credentials = this.getCredentials(endpointAuth, authScheme, environmentName);
             var subscriptionId = tl.getEndpointDataParameter(connectedServiceNameARM, "SubscriptionId", true);
 
