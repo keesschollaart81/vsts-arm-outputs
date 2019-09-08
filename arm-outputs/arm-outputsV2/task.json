@@ -14,7 +14,7 @@
     "version": {
         "Major": 5,
         "Minor": 1,
-        "Patch": 0
+        "Patch": 1
     },
     "releaseNotes": "Complete rewrite from PowerShell to Node to enable Linux based agents",
     "demands": [],
@@ -84,7 +84,7 @@
         },
         {
             "name": "environment",
-            "type": "string",
+            "type": "pickList",
             "label": "Azure Environment",
             "required": true,
             "defaultValue": "azurecloud",
