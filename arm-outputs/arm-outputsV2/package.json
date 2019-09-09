@@ -17,7 +17,7 @@
   "dependencies": {
     "applicationinsights": "^1.0.8",
     "azure-arm-resource": "7.3.0",
-    "azure-pipelines-task-lib": "^2.7.5",
+    "azure-pipelines-task-lib": "^2.8.0",
     "micromatch": "4.0.2",
     "ms-rest-azure": "3.0.0"
   },
