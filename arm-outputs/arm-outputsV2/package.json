@@ -10,7 +10,7 @@
     "@types/applicationinsights": "0.20.0",
     "rimraf": "3.0.0",
     "typescript": "3.6.2",
-    "webpack": "^4.26.1",
+    "webpack": "^4.39.3",
     "webpack-cli": "^3.1.2",
     "copy-webpack-plugin": "5.0.4"
   },
