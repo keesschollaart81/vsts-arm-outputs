@@ -14,7 +14,7 @@
     "version": {
         "Major": 5,
         "Minor": 1,
-        "Patch": 2
+        "Patch": 3
     },
     "releaseNotes": "Complete rewrite from PowerShell to Node to enable Linux based agents",
     "demands": [],
@@ -81,20 +81,6 @@
             "label": "Filter deployment name",
             "required": false,
             "helpMarkDown": "Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in Azure Pipelines are the name of the JSON file plus the date and time, so a file `CreateKeyVault.json` could have a deployment name of `CreateKeyVault-20180025-151538-0688`. In this case, if you want to filter to deployments of this file enter `CreateKeyVault` as the filter.<br/><br/>This uses [micromatch](https://github.com/micromatch/micromatch) under the hood (ignoring case) so us wildcards like *"
-        },
-        {
-            "name": "environment",
-            "type": "pickList",
-            "label": "Azure Environment",
-            "required": true,
-            "defaultValue": "azurecloud",
-            "helpMarkDown": "Set a specific Azure Cloud Instance, required when using MSI to authenticate against a specific AAD.",
-            "options": {
-                "azurecloud": "Azure",
-                "azurechinacloud": "AzureChina",
-                "azuregermancloud": "AzureGermanCloud",
-                "azureusgovernment": "AzureUSGovernment"
-            }
         }
     ],
     "dataSourceBindings": [
