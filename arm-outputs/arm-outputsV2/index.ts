@@ -103,12 +103,15 @@ export class AzureDevOpsArmOutputsTaskHost {
     }
 
     private getEnvironment = (environmentName: string): msrestAzure.AzureEnvironment => {
+        if (!environmentName) return msrestAzure.AzureEnvironment.Azure;
+
         const azureEnvironmentMaps = {
             azurechinacloud: msrestAzure.AzureEnvironment.AzureChina,
             azurecloud: msrestAzure.AzureEnvironment.Azure,
             azuregermancloud: msrestAzure.AzureEnvironment.AzureGermanCloud,
             azureusgovernment: msrestAzure.AzureEnvironment.AzureUSGovernment,
         };
+        
         return azureEnvironmentMaps[environmentName.toLowerCase()];
     }
 }
