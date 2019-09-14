@@ -15,11 +15,11 @@ export class AzureDevOpsArmOutputsTaskHost {
 
         try {
             const debugModeString: string = tl.getVariable('System.Debug');
-            const debugMode: boolean = debugModeString ?    .toLowerCase() != 'false' : false;
+            const debugMode: boolean = debugModeString ? debugModeString.toLowerCase() != 'false' : false;
             if (debugMode) {
                 tl.warning("You are running in debug mode (variable System.Debug is set to true), the values of your ARM Outputs will be printed to the log. If your deployment outputs any secret values, they will be shown, be careful (especially with public projects)!");
             }
-
+            
             let connectedServiceNameARM: string = tl.getInput("ConnectedServiceNameARM");
             var endpointAuth = tl.getEndpointAuthorization(connectedServiceNameARM, true);
             var authScheme = tl.getEndpointAuthorizationScheme(connectedServiceNameARM, true);
