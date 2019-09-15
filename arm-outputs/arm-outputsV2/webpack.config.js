@@ -14,7 +14,8 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       { from: "./icon.png", to: "icon.png" },
-      { from: "./task.json", to: "task.json" }
+      { from: "./task.json", to: "task.json" },
+      { from: './node_modules/azure-pipelines-task-lib/Strings', to: path.resolve(__dirname, 'dist', 'bundle', 'Strings') },
     ])
   ]
 };
