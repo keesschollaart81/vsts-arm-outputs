@@ -16,9 +16,9 @@
   },
   "dependencies": {
     "applicationinsights": "^1.0.8",
-    "azure-arm-resource": "7.2.1",
+    "azure-arm-resource": "7.3.0",
     "azure-pipelines-task-lib": "^2.7.5",
-    "micromatch": "3.1.10",
+    "micromatch": "4.0.2",
     "ms-rest-azure": "2.5.9"
   },
   "name": "caseonline.azuredevops.arm-outputs",
