@@ -7,7 +7,7 @@ module.exports = {
   target: 'node',
   output: {
     path: path.resolve(__dirname, 'dist/bundle'),
-    library: 'someLibName',
+    library: 'arm-outputs',
     libraryTarget: 'umd',
     filename: 'index.js'
   },

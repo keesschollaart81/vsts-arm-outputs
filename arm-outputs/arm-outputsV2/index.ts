@@ -14,6 +14,12 @@ export class AzureDevOpsArmOutputsTaskHost {
         let success = true;
 
         try {
+            const debugModeString: string = tl.getVariable('System.Debug');
+            const debugMode: boolean = debugModeString ? debugModeString.toLowerCase() != 'false' : false;
+            if (debugMode) {
+                tl.warning("You are running in debug mode (variable System.Debug is set to true), the values of your ARM Outputs will be printed to the log. If your deployment outputs any secret values, they will be shown, be careful (especially with public projects)!");
+            }
+            
             let connectedServiceNameARM: string = tl.getInput("ConnectedServiceNameARM");
             var endpointAuth = tl.getEndpointAuthorization(connectedServiceNameARM, true);
             var authScheme = tl.getEndpointAuthorizationScheme(connectedServiceNameARM, true);
@@ -30,12 +36,6 @@ export class AzureDevOpsArmOutputsTaskHost {
 
             if (!prefix || prefix == "null") prefix = "";
 
-            const debugModeString: string = tl.getVariable('System.Debug');
-            const debugMode: boolean = debugModeString ? debugModeString.toLowerCase() != 'false' : false;
-            if (debugMode) {
-                tl.warning("You are running in debug mode (variable System.Debug is set to true), the values of your ARM Outputs will be printed to the log. If your deployment outputs any secret values, they will be shown, be careful (especially with public projects)!");
-            }
-
             var params = <ArmOutputParams>{
                 tokenCredentials: credentials,
                 subscriptionId: subscriptionId,
@@ -48,10 +48,15 @@ export class AzureDevOpsArmOutputsTaskHost {
 
             var armOutputs = new ArmOutputs(params);
             var outputs = await armOutputs.run();
-            outputs.forEach(output => {
-                console.info(`Updating Azure Pipelines variable '${output.key}'`);
-                tl.setVariable(output.key, output.value, false);
-            });
+            
+            if (outputs && outputs.length == 0) {
+                tl.warning(`No output parameters could be found for the deployment`);
+            } else {
+                outputs.forEach(output => {
+                    console.info(`Updating Azure Pipelines variable '${output.key}'`);
+                    tl.setVariable(output.key, output.value, false);
+                });
+            }
         }
         catch (err) {
             console.error("Unhandled exception during ARM Outputs Task", err);
@@ -98,12 +103,15 @@ export class AzureDevOpsArmOutputsTaskHost {
     }
 
     private getEnvironment = (environmentName: string): msrestAzure.AzureEnvironment => {
+        if (!environmentName) return msrestAzure.AzureEnvironment.Azure;
+
         const azureEnvironmentMaps = {
             azurechinacloud: msrestAzure.AzureEnvironment.AzureChina,
             azurecloud: msrestAzure.AzureEnvironment.Azure,
             azuregermancloud: msrestAzure.AzureEnvironment.AzureGermanCloud,
             azureusgovernment: msrestAzure.AzureEnvironment.AzureUSGovernment,
         };
+        
         return azureEnvironmentMaps[environmentName.toLowerCase()];
     }
 }
