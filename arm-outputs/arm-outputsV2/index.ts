@@ -14,19 +14,23 @@ export class AzureDevOpsArmOutputsTaskHost {
         let success = true;
 
         try {
+            console.info("kees:3");
             const debugModeString: string = tl.getVariable('System.Debug');
             const debugMode: boolean = debugModeString ? debugModeString.toLowerCase() != 'false' : false;
             if (debugMode) {
                 tl.warning("You are running in debug mode (variable System.Debug is set to true), the values of your ARM Outputs will be printed to the log. If your deployment outputs any secret values, they will be shown, be careful (especially with public projects)!");
             }
-            
+
+            console.info("kees:4");
             let connectedServiceNameARM: string = tl.getInput("ConnectedServiceNameARM");
             var endpointAuth = tl.getEndpointAuthorization(connectedServiceNameARM, true);
             var authScheme = tl.getEndpointAuthorizationScheme(connectedServiceNameARM, true);
+            console.info("kees:5");
             var environmentName = tl.getEndpointDataParameter(connectedServiceNameARM, "environment", true);
             var credentials = this.getCredentials(endpointAuth, authScheme, environmentName);
             var subscriptionId = tl.getEndpointDataParameter(connectedServiceNameARM, "SubscriptionId", true);
 
+            console.info("kees:6");
             var resourceGroupName = tl.getInput("resourceGroupName", true);
             var prefix = tl.getInput("prefix", false);
             var outputNames = tl.getDelimitedInput("outputNames", ",", false);
@@ -34,6 +38,7 @@ export class AzureDevOpsArmOutputsTaskHost {
             var whenLastDeploymentIsFailed = FailBehaviour[whenLastDeploymentIsFailedString];
             var deploymentNameFilter = tl.getInput("deploymentNameFilter", false);
 
+            console.info("kees:7");
             if (!prefix || prefix == "null") prefix = "";
 
             var params = <ArmOutputParams>{
@@ -47,8 +52,10 @@ export class AzureDevOpsArmOutputsTaskHost {
             };
 
             var armOutputs = new ArmOutputs(params);
+            console.info("kees:8");
             var outputs = await armOutputs.run();
-            
+
+            console.info("kees:9");
             if (outputs && outputs.length == 0) {
                 tl.warning(`No output parameters could be found for the deployment`);
             } else {
@@ -111,14 +118,18 @@ export class AzureDevOpsArmOutputsTaskHost {
             azuregermancloud: msrestAzure.AzureEnvironment.AzureGermanCloud,
             azureusgovernment: msrestAzure.AzureEnvironment.AzureUSGovernment,
         };
-        
+
         return azureEnvironmentMaps[environmentName.toLowerCase()];
     }
 }
 var azureDevOpsArmOutputsTaskHost = new AzureDevOpsArmOutputsTaskHost();
 
-azureDevOpsArmOutputsTaskHost.run().then((result) =>
+azureDevOpsArmOutputsTaskHost.run().then((result) => {
+    console.info("kees:1");
     tl.setResult(tl.TaskResult.Succeeded, "")
-).catch((error) =>
+}
+).catch((error) => {
+    console.error("kees:2", error)
     tl.setResult(tl.TaskResult.Failed, error)
+}
 );
