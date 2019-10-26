@@ -5,19 +5,19 @@
     "clean": "rimraf ./dist && rimraf ./*.vsix"
   },
   "devDependencies": {
-    "@types/node": "^10.14.14",
+    "@types/node": "^12.11.7",
     "@types/micromatch": "3.1.0",
     "@types/applicationinsights": "0.20.0",
     "rimraf": "3.0.0",
-    "typescript": "3.6.2",
-    "webpack": "^4.26.1",
-    "webpack-cli": "^3.1.2",
+    "typescript": "3.6.4",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
     "copy-webpack-plugin": "5.0.4"
   },
   "dependencies": {
-    "applicationinsights": "^1.0.8",
+    "applicationinsights": "^1.5.0",
     "azure-arm-resource": "7.3.0",
-    "azure-pipelines-task-lib": "2.8.0",
+    "azure-pipelines-task-lib": "2.9.3",
     "micromatch": "3.1.10",
     "ms-rest-azure": "3.0.0"
   },

@@ -38,6 +38,7 @@ export class AzureDevOpsArmOutputsTaskHost {
 
             var params = <ArmOutputParams>{
                 tokenCredentials: credentials,
+                environmentName: environmentName,
                 subscriptionId: subscriptionId,
                 resourceGroupName: resourceGroupName,
                 prefix: prefix,
