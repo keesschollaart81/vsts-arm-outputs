@@ -9,7 +9,8 @@ export class ArmOutputs {
     private resourceManagementClient: r.ResourceManagementClient.default;
 
     constructor(private config: ArmOutputParams) {
-        this.resourceManagementClient = new r.ResourceManagementClient.ResourceManagementClient(this.config.tokenCredentials, this.config.subscriptionId);
+        var baseUri = this.getBaseUri(this.config.environmentName);
+        this.resourceManagementClient = new r.ResourceManagementClient.ResourceManagementClient(this.config.tokenCredentials, this.config.subscriptionId, baseUri);
     }
 
     public run = async (): Promise<ArmOutputResult[]> => {
@@ -71,5 +72,18 @@ export class ArmOutputs {
             }
         }
         return out;
+    }
+
+    private getBaseUri = (environmentName: string): string => {
+        if (!environmentName) return 'https://management.azure.com';
+
+        const baseUriMaps = {
+            azurechinacloud: 'https://management.chinacloudapi.cn',
+            azurecloud: 'https://management.azure.com',
+            azuregermancloud: 'https://management.microsoftazure.de',
+            azureusgovernment: 'https://management.usgovcloudapi.net',
+        };
+        
+        return baseUriMaps[environmentName.toLowerCase()];
     }
 }
