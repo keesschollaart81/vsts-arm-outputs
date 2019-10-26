@@ -11,7 +11,7 @@
     "rimraf": "3.0.0",
     "typescript": "3.6.2",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.1.2",
+    "webpack-cli": "^3.3.9",
     "copy-webpack-plugin": "5.0.4"
   },
   "dependencies": {
