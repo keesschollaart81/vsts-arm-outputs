@@ -6,7 +6,7 @@
   },
   "devDependencies": {
     "@types/node": "^12.11.7",
-    "@types/micromatch": "3.1.0",
+    "@types/micromatch": "4.0.0",
     "@types/applicationinsights": "0.20.0",
     "rimraf": "3.0.0",
     "typescript": "3.6.4",
