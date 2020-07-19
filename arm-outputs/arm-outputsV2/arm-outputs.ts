@@ -3,6 +3,7 @@ import * as r from "azure-arm-resource"
 import * as mm from "micromatch"
 import { FailBehaviour } from "./FailBehaviour";
 import { ArmOutputResult } from "./ArmOutputResult";
+import { DeploymentListResult } from "azure-arm-resource/lib/resource/models";
 
 export class ArmOutputs {
 
@@ -13,8 +14,22 @@ export class ArmOutputs {
         this.resourceManagementClient = new r.ResourceManagementClient.ResourceManagementClient(this.config.tokenCredentials, this.config.subscriptionId, baseUri);
     }
 
+    private getAllDeployments = async (resourceGroupName: string): Promise<DeploymentListResult> => {
+        var deployments: DeploymentListResult = await this.resourceManagementClient.deployments.listByResourceGroup(resourceGroupName);
+        var nextLink = deployments.nextLink;
+
+        while (nextLink != null) {
+            console.log("next page");
+            var deploymentPage = await this.resourceManagementClient.deployments.listByResourceGroupNext(nextLink,);
+            nextLink = deploymentPage.nextLink;
+            deployments = deployments.concat(deploymentPage);
+        }
+        return deployments;
+    }
     public run = async (): Promise<ArmOutputResult[]> => {
-        var deployments = await this.resourceManagementClient.deployments.listByResourceGroup(this.config.resourceGroupName);
+
+        var deployments = await this.getAllDeployments(this.config.resourceGroupName);
+
         if (this.config.deploymentNameFilter) {
             deployments = deployments.filter(x => mm.isMatch(x.name, this.config.deploymentNameFilter, { nocase: true }));
         }
@@ -38,7 +53,7 @@ export class ArmOutputs {
         var results: ArmOutputResult[] = [];
 
         var outputs = deployments[0].properties.outputs;
-    
+
         for (var output in outputs) {
 
             if (this.config.outputNames.length > 0 && !this.config.outputNames.some(x => x.trim() == output)) {
@@ -83,7 +98,7 @@ export class ArmOutputs {
             azuregermancloud: 'https://management.microsoftazure.de',
             azureusgovernment: 'https://management.usgovcloudapi.net',
         };
-        
+
         return baseUriMaps[environmentName.toLowerCase()];
     }
 }
