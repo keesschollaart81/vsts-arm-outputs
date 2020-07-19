@@ -10,7 +10,15 @@ module.exports = {
     library: 'arm-outputs',
     libraryTarget: 'umd',
     filename: 'index.js'
-  }, 
+  },
+  module: {
+    rules: [
+      {
+        test: /\.resjson$/,
+        use: 'raw-loader'
+      },
+    ],
+  },
   plugins: [
     new CopyPlugin({
       patterns: [

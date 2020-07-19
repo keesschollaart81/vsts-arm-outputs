@@ -5,14 +5,15 @@
     "clean": "rimraf ./dist && rimraf ./*.vsix"
   },
   "devDependencies": {
-    "@types/node": "^14.0.23",
-    "@types/micromatch": "4.0.1",
     "@types/applicationinsights": "0.20.0",
+    "@types/micromatch": "4.0.1",
+    "@types/node": "^14.0.23",
+    "copy-webpack-plugin": "6.0.3",
+    "raw-loader": "^4.0.1",
     "rimraf": "3.0.2",
     "typescript": "3.9.7",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12",
-    "copy-webpack-plugin": "6.0.3"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "applicationinsights": "^1.8.2",
