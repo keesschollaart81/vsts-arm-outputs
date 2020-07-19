@@ -13,7 +13,7 @@
     "author": "Kees Schollaart",
     "version": {
         "Major": 5,
-        "Minor": 2,
+        "Minor": 4,
         "Patch": 0
     },
     "releaseNotes": "Complete rewrite from PowerShell to Node to enable Linux based agents",
