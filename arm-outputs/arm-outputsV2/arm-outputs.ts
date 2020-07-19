@@ -22,7 +22,7 @@ export class ArmOutputs {
 
         if (deployments.length > 0 && this.config.whenLastDeploymentIsFailed == FailBehaviour.latestSuccesful) {
             if (deployments[0].properties.provisioningState != "Succeeded") {
-                console.debug(`Deployment '${deployments[0].name}' of Resource Group '${this.config.resourceGroupName}' did not succeed ('${deployments[0].properties.provisioningState}'), ingoring this deployment and finding latest succesful deployment`)
+                console.log(`Deployment '${deployments[0].name}' of Resource Group '${this.config.resourceGroupName}' did not succeed ('${deployments[0].properties.provisioningState}'), ingoring this deployment and finding latest succesful deployment`)
             }
             deployments = deployments.filter(x => x.properties.provisioningState == "Succeeded");
         }
