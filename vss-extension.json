@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "arm-outputs",
     "name": "ARM Outputs",
-    "version": "5.4.0",
+    "version": "5.4.1",
     "publisher": "keesschollaart",
     "public": true,
     "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
