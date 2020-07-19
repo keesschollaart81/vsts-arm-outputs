@@ -1,5 +1,5 @@
 var path = require('path');
-const CopyPlugin = require('copy-webpack-plugin'); 
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -11,10 +11,10 @@ module.exports = {
     libraryTarget: 'umd',
     filename: 'index.js'
   }, 
-  plugins: [ 
+  plugins: [
     new CopyPlugin({
       patterns: [
-        { from: "node_modules/azure-pipelines-task-lib/Strings", to: "node_modules/azure-pipelines-task-lib/Strings" },
+        { from: "node_modules/azure-pipelines-task-lib", to: "node_modules/azure-pipelines-task-lib" },
         { from: "./icon.png", to: "icon.png" },
         { from: "./task.json", to: "task.json" }
       ]
