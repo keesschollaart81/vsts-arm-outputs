@@ -10,11 +10,11 @@ module.exports = {
     library: 'arm-outputs',
     libraryTarget: 'umd',
     filename: 'index.js'
-  },
+  }, 
   plugins: [ 
     new CopyPlugin({
       patterns: [
-        { from: "node_modules/azure-pipelines-task-lib/Strings", to: "Strings" },
+        { from: "node_modules/azure-pipelines-task-lib/Strings", to: "node_modules/azure-pipelines-task-lib/Strings" },
         { from: "./icon.png", to: "icon.png" },
         { from: "./task.json", to: "task.json" }
       ]
