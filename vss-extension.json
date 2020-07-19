@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "arm-outputs",
     "name": "ARM Outputs",
-    "version": "5.4.10",
+    "version": "5.4.11",
     "publisher": "keesschollaart",
     "public": true,
     "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
@@ -82,8 +82,12 @@
             "packagePath": "/arm-outputs/arm-outputsV1/"
         },
         {
-            "path": "arm-outputs/arm-outputsV2/dist/bundle",
+            "path": "arm-outputs/arm-outputsV2/dist",
             "packagePath": "/arm-outputs/arm-outputsV2/"
+        },
+        {
+            "path": "arm-outputs/arm-outputsV2/node_modules",
+            "packagePath": "/arm-outputs/arm-outputsV2/node_modules/"
         },
         {
             "path": "images/screenshot.png",
