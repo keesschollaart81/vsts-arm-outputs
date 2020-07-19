@@ -14,6 +14,7 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
+        // { from: "node_modules/azure-pipelines-task-lib", to: "node_modules/azure-pipelines-task-lib" },
         { from: "./icon.png", to: "icon.png" },
         { from: "./task.json", to: "task.json" }
       ]

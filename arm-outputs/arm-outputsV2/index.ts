@@ -6,6 +6,7 @@ import { FailBehaviour } from './FailBehaviour';
 import { _checkPath } from 'azure-pipelines-task-lib/internal';
 import appInsights from "./logger"
 import { ServiceClientCredentials } from 'ms-rest';
+import 'azure-pipelines-task-lib/lib.json'
 
 export class AzureDevOpsArmOutputsTaskHost {
 
