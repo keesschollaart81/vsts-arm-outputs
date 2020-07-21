@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "build": "tsc -p .",
-    "postbuild": "webpack --config webpack.config",
+    "build": "tsc -p .", 
     "clean": "rimraf ./dist && rimraf ./*.vsix"
   },
   "devDependencies": {
