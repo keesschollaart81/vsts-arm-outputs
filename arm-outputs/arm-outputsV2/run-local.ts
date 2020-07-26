@@ -7,11 +7,11 @@ import { FailBehaviour } from './FailBehaviour';
 const environmentName = "AzureCloud";
 const subscriptionId = "f2da982c-fc6f-4663-ad1e-46a186f9fa84";
 const tenantId = "7d25d723-384b-4d25-aaba-4e6c8b0762d5";
-const resourceGroupName = "Home-Assistant-Backend"
-const prefix = "pref"
-const outputNames = ["complex", "storageAccountName"]
-const whenLastDeploymentIsFailed: FailBehaviour = FailBehaviour.latestSuccesful
-const deploymentNameFilter = "azured*"
+const resourceGroupName = "azurecostinsightsprd"
+const prefix = ""
+const outputNames = [ ]
+const whenLastDeploymentIsFailed: FailBehaviour = FailBehaviour.fail
+const deploymentNameFilter = "*"
 
 msRestAzure.interactiveLogin({ domain: tenantId }, (err, creds) => {
     if (err) {

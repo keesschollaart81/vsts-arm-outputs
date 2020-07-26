@@ -20,6 +20,10 @@
       "type": "string",
       "value": "stringValue"
     },
+    "stringKeyWithQuote": {
+      "type": "string",
+      "value": "string\"Value"
+    },
     "storageAccountKey": {
       "type": "securestring",
       "value": "this should not be visible"
