@@ -10,19 +10,10 @@ module.exports = {
     library: 'arm-outputs',
     libraryTarget: 'umd',
     filename: 'index.js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.resjson$/,
-        use: 'raw-loader'
-      },
-    ],
-  },
+  }, 
   plugins: [
     new CopyPlugin({
-      patterns: [
-        { from: "node_modules/azure-pipelines-task-lib", to: "node_modules/azure-pipelines-task-lib" }, 
+      patterns: [ 
         { from: "./icon.png", to: "icon.png" },
         { from: "./task.json", to: "task.json" }
       ]
