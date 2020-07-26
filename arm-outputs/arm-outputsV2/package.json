@@ -1,6 +1,7 @@
 {
   "scripts": {
     "build": "tsc -p .",
+    "postbuild": "webpack --config webpack.config",
     "clean": "rimraf ./dist && rimraf ./*.vsix"
   },
   "devDependencies": {
@@ -15,10 +16,10 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "applicationinsights": "^1.8.2",
-    "azure-arm-resource": "7.4.0",
-    "azure-pipelines-task-lib": "2.7.7",
-    "micromatch": "4.0.2",
+    "applicationinsights": "^1.5.0",
+    "azure-arm-resource": "7.3.0",
+    "azure-pipelines-task-lib": "2.9.3",
+    "micromatch": "3.1.10",
     "ms-rest-azure": "3.0.0"
   },
   "name": "caseonline.azuredevops.arm-outputs",
