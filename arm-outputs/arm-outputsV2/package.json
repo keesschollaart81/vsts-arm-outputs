@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "tsc -p .", 
+    "build": "tsc -p .",
     "clean": "rimraf ./dist && rimraf ./*.vsix"
   },
   "devDependencies": {
