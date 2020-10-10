@@ -9,7 +9,7 @@
     "@types/micromatch": "4.0.1",
     "@types/node": "^14.0.23",
     "copy-webpack-plugin": "6.0.3",
-    "raw-loader": "^4.0.1",
+    "raw-loader": "^4.0.2",
     "rimraf": "3.0.2",
     "typescript": "3.9.7",
     "webpack": "^4.43.0",
