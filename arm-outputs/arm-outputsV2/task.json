@@ -69,10 +69,10 @@
             "label": "When last deployment is failed",
             "defaultValue": "fail",
             "required": true,
-            "helpMarkDown": "Choose the behaviour when the latest deployment is not successful.",
+            "helpMarkDown": "Choose the behavior when the latest deployment is not successful.",
             "options": {
                 "fail": "Fail task",
-                "latestSuccesful": "Use last successful deploment"
+                "latestSuccesful": "Use last successful deployment"
             }
         },
         {
@@ -81,6 +81,13 @@
             "label": "Filter deployment name",
             "required": false,
             "helpMarkDown": "Optional string to filter deployments by. This can be useful if you have concurrent deployments to the same resource group. Deployment names in Azure Pipelines are the name of the JSON file plus the date and time, so a file `CreateKeyVault.json` could have a deployment name of `CreateKeyVault-20180025-151538-0688`. In this case, if you want to filter to deployments of this file enter `CreateKeyVault` as the filter.<br/><br/>This uses [micromatch](https://github.com/micromatch/micromatch) under the hood (ignoring case) so us wildcards like *"
+        },
+        {
+            "name": "setAsOutput",
+            "type": "boolean",
+            "label": "Set as Output variables.",
+            "defaultValue": "false",
+            "helpMarkDown": "In case the variables needs to be shared in other jobs or stages, they need to be set as Output variables. Select this option to output all of the retrieved variables as Output variables."
         }
     ],
     "dataSourceBindings": [
