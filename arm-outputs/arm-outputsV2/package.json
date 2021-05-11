@@ -16,7 +16,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "applicationinsights": "^1.5.0",
+    "applicationinsights": "^2.0.0",
     "azure-arm-resource": "7.3.0",
     "azure-pipelines-task-lib": "2.9.3",
     "micromatch": "3.1.10",
