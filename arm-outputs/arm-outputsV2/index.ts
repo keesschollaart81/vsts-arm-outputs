@@ -4,14 +4,11 @@ import { ArmOutputs } from './arm-outputs';
 import { ArmOutputParams } from './ArmOutputParams';
 import { FailBehaviour } from './FailBehaviour';
 import { _checkPath } from 'azure-pipelines-task-lib/internal';
-import appInsights from "./logger"
 import { ServiceClientCredentials } from 'ms-rest';
 
 export class AzureDevOpsArmOutputsTaskHost {
 
     public run = async (): Promise<void> => {
-        let start = Date.now();
-        let success = true;
 
         try {
             const debugModeString: string = tl.getVariable('System.Debug');
@@ -61,24 +58,7 @@ export class AzureDevOpsArmOutputsTaskHost {
         }
         catch (err) {
             console.error("Unhandled exception during ARM Outputs Task", err);
-            try {
-                if (!tl.getVariable("arm-outputs-notelemetry")) {
-                    appInsights.trackException({ exception: err });
-                }
-                success = false;
-            }
-            catch{ } // dont let AI cause exceptions
             throw err;
-        }
-        finally {
-            try {
-                let duration = Date.now() - start;
-                if (!tl.getVariable("arm-outputs-notelemetry")) {
-                    appInsights.trackRequest({ duration: duration, name: "ARM Outputs", url: "/", resultCode: success ? 200 : 500, success: success })
-                    appInsights.flush();
-                }
-            }
-            catch{ }// dont let AI cause exceptions
         }
     }
 
