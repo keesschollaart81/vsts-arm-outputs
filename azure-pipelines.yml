@@ -8,9 +8,8 @@ trigger:
 pr:
 - master 
 
-queue:
-  name: windows-latest
-  demands: npm
+pool:
+  name: default
 
 steps:
 - task: Npm@1
