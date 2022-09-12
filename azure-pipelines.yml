@@ -25,8 +25,9 @@ steps:
     workingDir: 'arm-outputs/arm-outputsV2/' 
     customCommand: 'run build'
 
-- task: ms-devlabs.vsts-developer-tools-build-tasks.package-extension-build-task.PackageVSTSExtension@1
-  displayName: 'Package Extension'
+- script: 
+    npm i -g tfx-cli
+    tfx extension create 
  
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
