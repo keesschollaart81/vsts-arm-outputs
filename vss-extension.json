@@ -1,8 +1,8 @@
 {
     "manifestVersion": 1,
-    "id": "arm-outputs-development",
+    "id": "arm-outputs",
     "name": "ARM Outputs",
-    "version": "6.1.1",
+    "version": "6.1.2",
     "publisher": "keesschollaart",
     "public": true,
     "helpMarkDown": "[More Information](https://github.com/keesschollaart81/vsts-arm-outputs)",
