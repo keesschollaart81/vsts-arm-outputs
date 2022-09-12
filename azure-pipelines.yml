@@ -9,7 +9,7 @@ pr:
 - master 
 
 pool:
-  name: default
+  name: Azure Pipelines
 
 steps:
 - task: Npm@1
